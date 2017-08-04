@@ -1,5 +1,6 @@
 package medusa.models;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -35,6 +36,9 @@ public class Application {
 	@OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
 	@JoinTable(joinColumns = @JoinColumn(name = "applicationId"),inverseJoinColumns = @JoinColumn(name = "responseId"))
 	private List<Response> responses;
+	
+	@Column(name = "dateApplied")
+	private Date dateApplied;
 
 	public long getId() {
 		return id;
@@ -76,6 +80,14 @@ public class Application {
 		this.responses = responses;
 	}
 	
+	public Date getDateApplied() {
+		return dateApplied;
+	}
+
+	public void setDateApplied(Date dateApplied) {
+		this.dateApplied = dateApplied;
+	}
+
 	public void addResponse(Response response) {
 		responses.add(response);
 	}
