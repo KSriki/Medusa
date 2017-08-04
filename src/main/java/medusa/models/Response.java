@@ -1,4 +1,4 @@
-package medusa.model;
+package medusa.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.aspectj.weaver.patterns.TypePatternQuestions.Question;
+
+import medusa.models.Application;
 
 @Entity
 public class Response {

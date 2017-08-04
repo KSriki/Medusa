@@ -174,7 +174,7 @@ public class Program {
 		applications.add(application);
 	}
 	
-	public void removeApplication(Application Application) {
+	public void removeApplication(Application application) {
 		applications.remove(application);
 	}
 	

@@ -1,4 +1,4 @@
-package medusa.model;
+package medusa.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import medusa.models.Program;
+import medusa.models.Question;
 
 @Entity
 public class Threshold {

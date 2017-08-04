@@ -23,7 +23,7 @@ public class User {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
     
-    @Column(name = "password"
+    @Column(name = "password")
     private String password;
     
     @Column(name = "firstName")
@@ -158,7 +158,7 @@ public class User {
 	}
 	
 	public void removeProgram(Program program) {
-		colleges.remove(college);
+		programs.remove(program);
 	}
 	
 	public void addApplication(Application application) {

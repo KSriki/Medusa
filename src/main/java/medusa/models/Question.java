@@ -125,8 +125,8 @@ public class Question {
 		responses.add(response);
 	}
 	
-	public void removeResponse(Response Response) {
-		programs.remove(program);
+	public void removeResponse(Response response) {
+		programs.remove(response);
 	}
 	
 	public void addThreshold(Threshold threshold) {
@@ -134,6 +134,6 @@ public class Question {
 	}
 	
 	public void removeThreshold(Threshold threshold) {
-		threshold.remove(threshold);
+		thresholds.remove(threshold);
 	}
 }
