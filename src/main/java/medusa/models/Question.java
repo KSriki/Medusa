@@ -126,7 +126,7 @@ public class Question {
 	}
 	
 	public void removeResponse(Response response) {
-		programs.remove(response);
+		responses.remove(response);
 	}
 	
 	public void addThreshold(Threshold threshold) {
