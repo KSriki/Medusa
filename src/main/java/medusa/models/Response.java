@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import org.aspectj.weaver.patterns.TypePatternQuestions.Question;
+
 
 import medusa.models.Application;
 
