@@ -16,9 +16,23 @@
         <h1>My Dashboard</h1>
         <p class="lead"> Welcome to your Medusa Education Dashboard! </p>
     </div>
+    	
+    	
+    <div sec:authentication="hasAuthority('APP')">
+    
+    	<p>Shown only to Applicant </p>
     	<p><a href="/myprofile">My Profile</a></p>    
     	<p><a href="/browseprograms"> Browse Programs</a></p>
     	<p><a href="/myprograms">My Programs</a></p>
+    </div>
+    
+    <div sec:authentication="hasAuthority('PADMIN')">
+    	<p>Shown only to Program Admin</p>
+    </div>
+    
+    <div sec:authentication="hasAuthority('SADMIN')">
+    	<p>Shown only to Site Admin</p>
+    </div>
   
   <!--  Logged in User:
     <div sec:authentication="name">
@@ -29,7 +43,7 @@
         Logged user: <span sec:authentication="name">Bob</span>
         Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
     </div>
-    <div sec:authorize="hasAuthority('ADMIN')" >
+    <div sec:authorize="hasAuthority('PADMIN')" >
         This content is only shown to administrators.
     </div>
     <div sec:authorize="hasAuthority('USER')" >
