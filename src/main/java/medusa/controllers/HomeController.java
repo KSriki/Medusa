@@ -29,13 +29,6 @@ public class HomeController {
 	   public String index(Model model){
 	        return "homepage";
 	  }
-	
-
-	
-    @RequestMapping("/login")
-    public String login(){
-        return "login";
-    }
     
     @RequestMapping(value="/register", method = RequestMethod.GET)
     public String showRegistrationPage(Model model){
