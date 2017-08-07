@@ -30,10 +30,7 @@ public class HomeController {
 	        return "homepage";
 	  }
 	
-	@RequestMapping("/chat")
-	public String chat() {
-		return "chat";
-	}
+
 	
     @RequestMapping("/login")
     public String login(){
