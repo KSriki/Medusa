@@ -18,7 +18,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class User {
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     
     @Column(name = "email", nullable = false, unique = true)
@@ -42,15 +42,14 @@ public class User {
     @Column(name = "active")
     private String active;
     
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(joinColumns = @JoinColumn(name = "userId"),inverseJoinColumns = @JoinColumn(name = "collegeId"))
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH})
     private List<College> colleges;
     
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(joinColumns = @JoinColumn(name = "userId"),inverseJoinColumns = @JoinColumn(name = "programId"))
     private List<Program> programs;
     
-    @OneToMany(fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST})
+    @OneToMany(fetch = FetchType.LAZY,cascade = {CascadeType.REFRESH})
     @JoinTable(joinColumns = @JoinColumn(name = "userId"),inverseJoinColumns = @JoinColumn(name = "applicationId"))
     private List<Application> applications;
     

@@ -46,6 +46,9 @@ public class DataLoader implements CommandLineRunner{
         programRepository.save(universal);
         college1.addProgram(universal);
         collegeRepository.save(college1);
+//    	College college1 = collegeRepository.findByName("Montgomery College");
+//    	College college2 = collegeRepository.findByName("Frederick College");
+//    	User user2 = userRepository.findByUsername("jim");
         Program program = new Program("Java Developer", "Complete Java developer training for beginners", new Date(2017,7,31), new Date(2017,8,30), new Date(2017,7,15), 30, "10:00 AM - 12:00 PM\nMWF");
         program.setCollege(college1);
         program.addUser(user2);
@@ -54,6 +57,7 @@ public class DataLoader implements CommandLineRunner{
         user2.addProgram(program);
         college1.addProgram(program);
         userRepository.save(user2);
+        System.out.println(college1.getPrograms());
         collegeRepository.save(college1);
         Program program3 = new Program("Cryptography", "Basics of cryptography and encryption including hashing and public/private key pairs", new Date(2017,7,31), new Date(2017,8,30), new Date(2017,7,15), 20, "10:00 AM - 4:00 PM\nTR");
         program3.setCollege(college1);
@@ -68,13 +72,13 @@ public class DataLoader implements CommandLineRunner{
         System.out.println(program3.getId());
         userRepository.save(user2);
         collegeRepository.save(college1);
-//        Program program2 = new Program("Networking Protocols", "Computer networking protocols - hands on training", new Date(2017,7,31), new Date(2017,8,30), new Date(2017,7,15), 20, "9:00 AM - 10:00 PM\nMWF");
-//        program2.setCollege(college2);
-//        program2.addUser(user2);
-//        user2.addProgram(program2);
-//        college2.addProgram(program2);
-//        programRepository.save(program2);
-//        userRepository.save(user2);
-//        collegeRepository.save(college2);
+        Program program2 = new Program("Networking Protocols", "Computer networking protocols - hands on training", new Date(2017,7,31), new Date(2017,8,30), new Date(2017,7,15), 20, "9:00 AM - 10:00 PM\nMWF");
+        program2.setCollege(college2);
+        program2.addUser(user2);
+        user2.addProgram(program2);
+        college2.addProgram(program2);
+        programRepository.save(program2);
+        userRepository.save(user2);
+        collegeRepository.save(college2);
     }
 }

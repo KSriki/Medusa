@@ -19,7 +19,7 @@ import javax.persistence.OneToMany;
 public class Application {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	@Column(name = "status")
@@ -33,7 +33,7 @@ public class Application {
 	@JoinColumn(name = "userId", nullable = false)
 	private User user;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
+	@OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH})
 	@JoinTable(joinColumns = @JoinColumn(name = "applicationId"),inverseJoinColumns = @JoinColumn(name = "responseId"))
 	private List<Response> responses;
 	

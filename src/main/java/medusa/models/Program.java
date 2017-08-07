@@ -21,7 +21,7 @@ import javax.persistence.OneToMany;
 public class Program {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 	
 	@Column(name = "name")
@@ -58,7 +58,7 @@ public class Program {
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "programs")
 	private List<User> users;
 	
-	@OneToMany(fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST})
+	@OneToMany(fetch = FetchType.LAZY,cascade = {CascadeType.REFRESH})
     @JoinTable(joinColumns = @JoinColumn(name = "groupId"),inverseJoinColumns = @JoinColumn(name = "applicationId"))
 	private List<Application> applications;
 	

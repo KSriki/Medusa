@@ -23,7 +23,7 @@ import javax.persistence.ManyToMany;
 public class College {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	@Column(name = "name")
@@ -32,11 +32,13 @@ public class College {
 	@Column(name="active")
 	private String active;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
+	@OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH})
 	@JoinTable(joinColumns = @JoinColumn(name = "collegeId"),inverseJoinColumns = @JoinColumn(name = "programId"))
 	private List<Program> programs;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(joinColumns = @JoinColumn(name = "collegeId"),inverseJoinColumns = @JoinColumn(name = "userId"))
 	private List<User> users;
 
 	public College() {

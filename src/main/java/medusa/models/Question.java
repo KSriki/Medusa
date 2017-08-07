@@ -18,7 +18,7 @@ import javax.persistence.OneToMany;
 public class Question {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	@Column(name = "content")
@@ -37,11 +37,11 @@ public class Question {
     @JoinTable(joinColumns = @JoinColumn(name = "questionId"),inverseJoinColumns = @JoinColumn(name = "programId"))
 	private List<Program> programs;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
+	@OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH})
 	@JoinTable(joinColumns = @JoinColumn(name = "questionId"),inverseJoinColumns = @JoinColumn(name = "responseId"))
 	private List<Response> responses;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
+	@OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH})
 	@JoinTable(joinColumns = @JoinColumn(name = "questionId"),inverseJoinColumns = @JoinColumn(name = "thresholdId"))
 	private List<Threshold> thresholds;
 	
