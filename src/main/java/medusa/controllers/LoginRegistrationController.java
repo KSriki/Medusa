@@ -1,4 +1,4 @@
-package com.example.demo;
+package medusa.controllers;
 
 import java.security.Principal;
 import org.springframework.stereotype.Controller;
