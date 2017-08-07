@@ -1,5 +1,6 @@
 package medusa.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -38,6 +39,18 @@ public class College {
 	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
 	private List<User> siteAdmins;
 
+	public College() {
+		this.active = "true";
+		this.programs = new ArrayList<Program>();
+		this.siteAdmins = new ArrayList<User>();
+	}
+	
+	public College(String name) {
+		this.name = name;
+		this.active = "true";
+		this.programs = new ArrayList<Program>();
+		this.siteAdmins = new ArrayList<User>();
+	}
 	
 	public void addProgram(Program p) {
 		programs.add(p);

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org "
+	xmlns:sec="www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Browse programs[index]s</title>
+</head>
+<body>
+<div class="container">
+	<div th:if="${not #lists.isEmpty(programs[index]s)}">
+		<h2>Products List</h2>
+		<th:block th:each="index : ${#numbers.sequence( 0, #arrays.length(programs[index]s)-1)}">
+			<div class="program-container">
+				<div class="course-name">
+					<p th:text="${'Course: ' + programs[index].name}"></p>
+					<p th:text="${'ID: ' + programs[index].id}"></p>
+				</div>
+				<div class="course-apply">
+					<form action="#" th:action="@{apply}" th:object="${programs[index]}" method="post">
+						<input type="hidden" name="id" th:value="{programs[index].id}" />
+						<input type="hidden" name="name" th:value="{programs[index].name}" />
+						<input type="hidden" name="description" th:value="{programs[index].desciption}" />
+						<input type="hidden" name="startDate" th:value="{programs[index].startDate}" />
+						<input type="hidden" name="endDate" th:value="{programs[index].endDate}" />
+						<input type="hidden" name="classSize" th:value="{programs[index].classSize}" />
+						<input type="hidden" name="active" th:value="{programs[index].active}" />
+						<input type="hidden" name="open" th:value="{programs[index].open}" />
+						<input type="hidden" name="deadline" th:value="{programs[index].deadline}" />
+						<input type="hidden" name="schedule" th:value="{programs[index].schedule}" />
+						<input type="hidden" name="college" th:value="{programs[index].college.id}" />
+						<button class="btn btn-block" type="submit">Apply</button>
+					</form>
+				</div>
+				<div class="course-schedule">
+					<p th:text="${programs[index].schedule}"></p>
+				</div>
+				<div class="course-admins">
+					<p>programs[index] Admin(s)</p>
+					<th:block th:each="progAdmin : ${programs[index].users}">
+						<p th:text="${progAdmin.firstName + ' ' + progAdmin.lastName}"></p>
+					</th:block>
+				</div>
+				<div class="course-description">
+					<p th:text="${programs[index].description}"></p>
+				</div>
+				<div class="course-college-deadline">
+					<p th:text="${programs[index].college.name}"></p>
+					<p th:text="${'Deadline: ' + programs[index].deadline}"></p>
+				</div>
+				<div class="course-enrollment-range">
+					<p th:text="${'Students Enrolled: ' + counts[index] + '/' + programs[index].classSize}"></p>
+					<p th:text="${programs[index].startDate + ' - ' + programs[index].endDate}"></p>
+				</div>
+			</div>
+		</th:block>
+	</div>
+</div>
+</body>
+</html>

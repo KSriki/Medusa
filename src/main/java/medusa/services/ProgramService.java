@@ -1,5 +1,7 @@
 package medusa.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +19,9 @@ public class ProgramService {
     
     public void saveProgram(Program program) {
     	programRepository.save(program);
+    }
+    
+    public List<Program> programs() {
+    	return programRepository.findByActive("active");
     }
 }

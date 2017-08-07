@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import medusa.models.Application;
+import medusa.models.Program;
 import medusa.repositories.ApplicationRepository;
 
 @Service
@@ -17,5 +18,9 @@ public class ApplicationService {
     
     public void saveApplication(Application application) {
     	applicationRepository.save(application);
+    }
+    
+    public long countByProgramAndStatus(Program program, String status) {
+    	return applicationRepository.countByProgramAndStatus(program, status);
     }
 }
