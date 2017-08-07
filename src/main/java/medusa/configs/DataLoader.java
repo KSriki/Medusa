@@ -45,7 +45,7 @@ public class DataLoader implements CommandLineRunner{
         college1.addProgram(program);
         programRepository.save(program);
         collegeRepository.save(college1);
-        program = new Program("Java Developer", "Complete Java developer training for beginners", new Date(2017,7,31), new Date(2017,8,30), new Date(2017,7,15), 20, "10:00 AM - 4:00 PM\nTR");
+        program = new Program("Cryptography", "Basics of cryptography and encryption including hashing and public/private key pairs", new Date(2017,7,31), new Date(2017,8,30), new Date(2017,7,15), 20, "10:00 AM - 4:00 PM\nTR");
         program.setCollege(college1);
         college1.addProgram(program);
         programRepository.save(program);
