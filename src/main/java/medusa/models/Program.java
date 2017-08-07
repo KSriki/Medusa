@@ -47,6 +47,9 @@ public class Program {
 	@Column(name = "classSize")
 	private long classSize;
 	
+	@Column(name = "schedule")
+	private String schedule;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "collegeId", nullable = false)
 	private College college;
@@ -136,6 +139,14 @@ public class Program {
 
 	public void setClassSize(long classSize) {
 		this.classSize = classSize;
+	}
+
+	public String getSchedule() {
+		return schedule;
+	}
+
+	public void setSchedule(String schedule) {
+		this.schedule = schedule;
 	}
 
 	public College getCollege() {
