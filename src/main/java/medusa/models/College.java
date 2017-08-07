@@ -37,19 +37,19 @@ public class College {
 	private List<Program> programs;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
-	private List<User> siteAdmins;
+	private List<User> users;
 
 	public College() {
 		this.active = "true";
 		this.programs = new ArrayList<Program>();
-		this.siteAdmins = new ArrayList<User>();
+		this.users = new ArrayList<User>();
 	}
 	
 	public College(String name) {
 		this.name = name;
 		this.active = "true";
 		this.programs = new ArrayList<Program>();
-		this.siteAdmins = new ArrayList<User>();
+		this.users = new ArrayList<User>();
 	}
 	
 	public void addProgram(Program p) {
@@ -61,11 +61,11 @@ public class College {
 	}
 	
 	public void addUser(User u) {
-		siteAdmins.add(u);
+		users.add(u);
 	}
 	
 	public void removeUser(User u) {
-		siteAdmins.remove(u);
+		users.remove(u);
 	}
 	
 	public long getId() {
@@ -100,12 +100,12 @@ public class College {
 		this.programs = programs;
 	}
 
-	public List<User> getSiteAdmins() {
-		return siteAdmins;
+	public List<User> getusers() {
+		return users;
 	}
 
-	public void setSiteAdmins(List<User> siteAdmins) {
-		this.siteAdmins = siteAdmins;
+	public void setusers(List<User> users) {
+		this.users = users;
 	}
 
 }
