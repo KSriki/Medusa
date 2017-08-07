@@ -1,6 +1,7 @@
 package medusa.models;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -65,8 +66,26 @@ public class Program {
 	private List<Question> questions;
 	
 	public Program() {
-		active = "true";
-		open = "true";
+		this.active = "true";
+		this.open = "true";
+		this.users = new ArrayList<User>();
+		this.applications = new ArrayList<Application>();
+		this.questions = new ArrayList<Question>();		
+	}
+	
+	public Program(String name, String description, Date startDate, Date endDate, Date deadline, long classSize, String schedule) {
+		this.name = name;
+		this.description = description;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.deadline = deadline;
+		this.classSize = classSize;
+		this.schedule = schedule;
+		this.active = "true";
+		this.open = "true";
+		this.users = new ArrayList<User>();
+		this.applications = new ArrayList<Application>();
+		this.questions = new ArrayList<Question>();
 	}
 
 	public long getId() {

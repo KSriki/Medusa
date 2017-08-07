@@ -1,5 +1,6 @@
 package medusa.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -54,7 +55,22 @@ public class User {
     private List<Application> applications;
     
     public User() {
-    	active = "true";
+    	this.active = "true";
+    	this.colleges = new ArrayList<College>();
+    	this.programs = new ArrayList<Program>();
+    	this.applications = new ArrayList<Application>();
+    }
+    public User(String email, String password, String firstName, String lastName, String username, String role) {
+    	this.email = email;
+    	this.password = password;
+    	this.firstName = firstName;
+    	this.lastName = lastName;
+    	this.username = username;
+    	this.role = role;
+    	this.active = "true";
+    	this.colleges = new ArrayList<College>();
+    	this.programs = new ArrayList<Program>();
+    	this.applications = new ArrayList<Application>();
     }
 
 	public long getId() {
