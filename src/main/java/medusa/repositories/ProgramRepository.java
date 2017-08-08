@@ -13,7 +13,6 @@ public interface ProgramRepository extends CrudRepository<Program, Long> {
 	public Program findByName(String name);
 	//@Query("select p from Program p where ?1 in p.users and active=?2")
 	//might have proble,, getting right programs
-	public List<Program> findByActiveAndUsersIn(String active,List<User> users);
 	public Program findById(long id);
 
 }

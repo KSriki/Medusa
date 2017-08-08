@@ -24,7 +24,7 @@ hello world
 					<p th:text="${'ID: ' + program.id}"></p>
 				</div>
 				<div class="course-apply">
-					<form action="#" th:action="@{apply}" th:object="${program}" method="post">
+				
 						<input type="hidden" name="id" th:value="${program.id}" />
 						<input type="hidden" name="name" th:value="${program.name}" />
 						<input type="hidden" name="description" th:value="${program.description}" />
@@ -36,11 +36,15 @@ hello world
 						<input type="hidden" name="deadline" th:value="${program.deadline}" />
 						<input type="hidden" name="schedule" th:value="${program.schedule}" />
 						<input type="hidden" name="college" th:value="${program.college.id}" />
-						<button class="btn btn-block" type="submit">Apply</button>
-					</form>
+					
+					<!-- Add something for enrolling in acepted application? -->	
 				</div>
 			</div>
 			<div class="row">
+				<div>
+					
+					Should we add date enrolled/accpeted here?
+				</div>
 				<div class="course-schedule">
 					<p th:text="${program.schedule}"></p>
 				</div>

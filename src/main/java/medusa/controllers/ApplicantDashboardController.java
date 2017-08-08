@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import medusa.models.Application;
 import medusa.models.Program;
 import medusa.models.User;
 import medusa.services.ApplicationService;
@@ -60,17 +61,22 @@ public class ApplicantDashboardController {
 		
 		
 		User user = userService.findByUsername(principal.getName());
-		List<User> findThisUser = new ArrayList<User>();
-		findThisUser.add(user);
-		List<Program> programs = programService.findByActiveAndUsersIn("true", findThisUser);
-		List<Long> counts = new ArrayList<Long>();
-		System.out.println(programs);
-		for (Program program: programs) {
-			counts.add(applicationService.countByProgramAndStatus(program, "enrolled"));
-		}
-		model.addAttribute("programs", programs);
-		model.addAttribute("counts", counts);
 		
+		List<Application> apps = user.getApplications();
+		List<Program> progs = new ArrayList<Program>();
+		List<Long> counts = new ArrayList<Long>();
+		for(Application a : apps) {
+			if(!progs.contains(a.getProgram())) {
+				progs.add(a.getProgram());
+				counts.add(applicationService.countByProgramAndStatus(a.getProgram(), "enrolled"));
+			}
+		}
+		
+		List<User> findThisUser = new ArrayList<User>();
+
+		model.addAttribute("programs", progs);
+		model.addAttribute("counts", counts);
+//		
 		return "myprograms";
 	}
 	

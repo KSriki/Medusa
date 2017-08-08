@@ -26,12 +26,12 @@ public class ProgramService {
     	return programRepository.findByActive("true");
     }
     
-    public List<Program> findByActiveAndUsersIn(String active,List<User> users){
-		return programRepository.findByActiveAndUsersIn(active, users);
-    	
-    	
-    }
-    
+//    public List<Program> findByActiveAndUsersIn(String active,List<User> users){
+//		return programRepository.findByActiveAndUsersIn(active, users);
+//    	
+//    	
+//    }
+//    
 //    public List<Program> getProgramsByUser(User u) {
 //    	
 //    	
