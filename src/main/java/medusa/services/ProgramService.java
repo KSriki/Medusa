@@ -47,4 +47,8 @@ public class ProgramService {
     public Program findByName(String name) {
     	return programRepository.findByName(name);
     }
+    
+    public Program findById(long id) {
+    	return programRepository.findById(id);
+    }
 }
