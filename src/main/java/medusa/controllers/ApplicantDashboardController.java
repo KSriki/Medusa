@@ -30,6 +30,7 @@ public class ApplicantDashboardController {
 	public String browsePrograms(Model model) {
 		List<Program> programs = programService.programs();
 		List<Long> counts = new ArrayList<Long>();
+		System.out.println(programs);
 		for (Program program: programs) {
 			counts.add(applicationService.countByProgramAndStatus(program, "enrolled"));
 		}

@@ -22,6 +22,10 @@ public class ProgramService {
     }
     
     public List<Program> programs() {
-    	return programRepository.findByActive("active");
+    	return programRepository.findByActive("true");
+    }
+    
+    public Program findByName(String name) {
+    	return programRepository.findByName(name);
     }
 }

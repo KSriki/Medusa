@@ -39,6 +39,10 @@ public class Application {
 	
 	@Column(name = "dateApplied")
 	private Date dateApplied;
+	
+	public Application() {
+		status = "open";
+	}
 
 	public long getId() {
 		return id;
