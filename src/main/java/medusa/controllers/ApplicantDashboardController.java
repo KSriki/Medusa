@@ -53,25 +53,25 @@ public class ApplicantDashboardController {
 		return "dashboard";
 	}
 
-
-	@RequestMapping(value="/myprofile", method= RequestMethod.GET)
-	public String showProfile(Principal principal,Model model) {
-		User user = userService.findByUsername(principal.getName());
-		model.addAttribute("user", user);
-		return "myprofile";
-	}
-	
-
-
-	@RequestMapping(value="/myprofile", method= RequestMethod.POST)
-	public String editProfile(Principal principal,Model model) {
-		
-		
-		
-		User user = userService.findByUsername(principal.getName());
-		model.addAttribute("user", user);
-		return "myprofile";
-	}
+//
+//	@RequestMapping(value="/myprofile", method= RequestMethod.GET)
+//	public String showProfile(Principal principal,Model model) {
+//		User user = userService.findByUsername(principal.getName());
+//		model.addAttribute("user", user);
+//		return "myprofile";
+//	}
+//	
+//
+//
+//	@RequestMapping(value="/myprofile", method= RequestMethod.POST)
+//	public String editProfile(Principal principal,Model model) {
+//		
+//		
+//		
+//		User user = userService.findByUsername(principal.getName());
+//		model.addAttribute("user", user);
+//		return "myprofile";
+//	}
 	
 	
 	@RequestMapping(value="/myprograms")

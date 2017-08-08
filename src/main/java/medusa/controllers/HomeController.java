@@ -67,6 +67,12 @@ public class HomeController {
         return "userprofile";
     }
     
+    @RequestMapping("/login")
+    public String login(){
+        return "login";
+    }
+	
+    
     public void sendEmailWithoutTemplating_reg(String username,String useremail) throws UnsupportedEncodingException{
 
 		  final Email email = DefaultEmail.builder()

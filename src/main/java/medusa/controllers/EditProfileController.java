@@ -22,12 +22,16 @@ import it.ozimov.springboot.mail.model.defaultimpl.DefaultEmail;
 import it.ozimov.springboot.mail.service.EmailService;
 import medusa.models.User;
 import medusa.services.UserService;
+import medusa.validators.UserValidator;
 
 @Controller
 
 public class EditProfileController {
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private UserValidator userValidator;
 	
 	@Autowired
 	public EmailService emailService;
@@ -53,9 +57,16 @@ public class EditProfileController {
     	System.out.println(edituser.getPassword());
  
     	System.out.println(edituser.getPassword());
-        if ( user.getFirstName().equals("") ||user.getEmail().equals("") || user.getLastName().equals("") || user.getUsername().equals("") ) {
+    	
+        if ( user.getFirstName().equals("") ||user.getEmail().equals("") || user.getLastName().equals("") || user.getUsername().equals("")) {
             return "editprofile";
         } else {
+        	
+        	
+        	userValidator.validate(user,result);
+        	if( result.hasErrors()) {
+        		return "editprofile";
+        	}
         	user.setId(edituser.getId());
         	//user.setLastName(edituser.getLastName());
         	//user.setUsername(edituser.getUsername());
