@@ -3,82 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <title>Medusa</title>
-<link rel="stylesheet" href="../static/css/homepage.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="css/homepage.css">
+<style>
+a {font-size: 250%;
+	text-decoration: underline;}
+body {font-family: "Times New Roman", Georgia, Serif;} 
+h1,h2,h3,h4,h5,h6 { 
+  font-family: "Playfair Display"; 
+  letter-spacing: 5px; 
+ } 
+p{font-size: 100%;}
+</style> 
 </head>
 <body style="align: center">
-<a href="login.html">log in</a> 
-<a href="register.html">Register</a>
-	<!-- Banner taken from Katherine Kato at https://codepen.io/kathykato/pen/prEmKe -->
-	<div class="wrapper">
-		<div class="slider">
-			<img class="active" class="rotateimg90" src="picture/IMG_3504.JPG" width="1200" height="600">
-			<img class="active" class="rotateimg90" src="picture/IMG_3507.JPG" width="1200" height="600"> 
-			<img class="active" src="picture/IMG_3503.PNG" width="1000" height="400">
-		</div>
-		<nav class="slider-nav">
-			<ul>
-				<li class="arrow"><a class="previous"> <span> <i
-							class="ion-arrow-left-c"></i>
-					</span>
-				</a></li>
-				<li class="arrow"><a class="next"> <span> <i
-							class="ion-arrow-right-c"></i>
-					</span>
-				</a></li>
-			</ul>
-		</nav>
-	</div>
-	<script type="text/javascript">
-const items = document.querySelectorAll('img');
-const itemCount = items.length;
-const nextItem = document.querySelector('.next');
-const previousItem = document.querySelector('.previous');
-let count = 0;
+<div align="right">
 
-function showNextItem() {
-  items[count].classList.remove('active');
-
-  if(count < itemCount - 1) {
-    count++;
-  } else {
-    count = 0;
-  }
-
-  items[count].classList.add('active');
-  console.log(count);
-}
-
-function showPreviousItem() {
-  items[count].classList.remove('active');
-
-  if(count > 0) {
-    count--;
-  } else {
-    count = itemCount - 1;
-  }
-
-  items[count].classList.add('active');
-  console.log(count);
-}
-
-nextItem.addEventListener('click', showNextItem);
-previousItem.addEventListener('click', showPreviousItem);
-</script>
+<a href="login.html" class="w3-bar-item w3-button" style="size:5">log in</a> 
+<a href="register.html" class="w3-bar-item w3-button" style="size:5">Register</a>
+</div>
+<div style="width:60%; margin-left:10%; margin-right:10%">
+<img src="picture/1.PNG" alt="School logo" >
+</div>
 <br />
 <hr />
 <br />
 <br />
 <div style="width: 60%; margin-left:auto; margin-right:auto;height: 80%;">
-<h3>
 
+<h3>About Us</h3>
+<hr /> <br />
+<p>
 Once you've made the decision to study in the US and you know where you want to study and which program you want to undertake, 
 you can enroll directly with the institution. If, however, you need more help with the admission application process, you can choose to use an education platform.
-
+</p>
+<hr />
+<p>
 An education platform can tell you about your options for studying and living in the US and assist with your visa and institution applications. In many cases, 
 agents have had experience studying in the US and can share their experiences with you. In addition, because they are dealing every day with application and visa application requirements they will be able to give you guidance for your particular situation.
-
-Here are some tips for choosing a platform:
-
+</p>
+<hr /> <br />
+<h4>Here are some tips for choosing a platform: </h4>
+<p>
     Under the US Government law, every education platform that uses the services of an education agent needs to have a contract with that organisation.
     the US education platform usually have more than one education platform appointed in a country so speak to more than one agent – collect and compare information.
     Under the US Government law, every the US education institution has to list on their website every education platform it has appointed to represent them in each country.
@@ -87,7 +53,21 @@ Here are some tips for choosing a platform:
     Ask about any fees that may be levied for using their services.
     Have a third party or friend help you understand the documents before you sign any documents.
     Remember, Medusa education platform cannot guarantee a permanent visa or work placement in the US after you graduate. Their job is to help with applications, so if it sounds too good to be true, keep looking. A reputable agent will be honest about the application process.
-</h3>
+</p>
 </div>
+<br />
+<hr />
+<div style="width:60%; margin-left:30%; margin-right:10%">
+<img src="picture/2.JPG" alt="school logo" width="400" height="400" style=" -webkit-transform:rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);">
+<img src="picture/3.JPG" alt="school logo" width="400" height="400" style=" -webkit-transform:rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);">
+ </div>
 </body>
 </html>
