@@ -61,6 +61,8 @@ public class HomeController {
         if (result.hasErrors()) {
             return "registration";
         } else {
+        	user.setRole("APP");
+        	System.out.println(user.getRole());
             userService.saveUser(user);
             model.addAttribute("message", "User Account Successfully Created");
             sendEmailWithoutTemplating_reg(user.getUsername(),user.getEmail());

@@ -64,7 +64,6 @@ public class EditProfileController {
         	
        
         	user.setId(edituser.getId());
-        	user.setRole("APP");
         	user.setLastName(edituser.getLastName());
         	user.setUsername(edituser.getUsername());
         	user.setEmail(edituser.getEmail());
