@@ -64,9 +64,9 @@ public class EditProfileController {
         	
        
         	user.setId(edituser.getId());
-        	//user.setLastName(edituser.getLastName());
-        	//user.setUsername(edituser.getUsername());
-        	//user.setEmail(edituser.getEmail());
+        	user.setLastName(edituser.getLastName());
+        	user.setUsername(edituser.getUsername());
+        	user.setEmail(edituser.getEmail());
         	user.setPassword(edituser.getPassword());
             userService.saveUser(user);
             model.addAttribute("message", "User Account Successfully Created");
@@ -94,12 +94,9 @@ public class EditProfileController {
         	System.out.println("hello");
             return "passwordchange";
         } else {
-        	user.setId(edituser.getId());
-        	user.setFirstName(edituser.getFirstName());
-        	user.setLastName(edituser.getLastName());
-        	user.setUsername(edituser.getUsername());
+        
         	user.setPassword(new_pass);
-        	user.setEmail(edituser.getEmail());
+
             userService.saveUser(user);
             model.addAttribute("message", "User Account Successfully Created");
             sendEmailWithoutTemplating_passchange(user.getUsername(),user.getEmail());
