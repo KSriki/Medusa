@@ -62,11 +62,7 @@ public class EditProfileController {
             return "editprofile";
         } else {
         	
-        	
-        	userValidator.validate(user,result);
-        	if( result.hasErrors()) {
-        		return "editprofile";
-        	}
+       
         	user.setId(edituser.getId());
         	//user.setLastName(edituser.getLastName());
         	//user.setUsername(edituser.getUsername());
