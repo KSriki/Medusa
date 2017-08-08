@@ -64,9 +64,10 @@ public class EditProfileController {
         	
        
         	user.setId(edituser.getId());
-        	//user.setLastName(edituser.getLastName());
-        	//user.setUsername(edituser.getUsername());
-        	//user.setEmail(edituser.getEmail());
+        	user.setRole("APP");
+        	user.setLastName(edituser.getLastName());
+        	user.setUsername(edituser.getUsername());
+        	user.setEmail(edituser.getEmail());
         	user.setPassword(edituser.getPassword());
             userService.saveUser(user);
             model.addAttribute("message", "User Account Successfully Created");
