@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import medusa.models.Application;
 import medusa.models.Program;
+import medusa.models.User;
 import medusa.repositories.ApplicationRepository;
 
 @Service
@@ -22,5 +23,9 @@ public class ApplicationService {
     
     public long countByProgramAndStatus(Program program, String status) {
     	return applicationRepository.countByProgramAndStatus(program, status);
+    }
+    
+    public Application findByProgramAndUser(Program program, User user) {
+    	return applicationRepository.findByProgramAndUser(program, user);
     }
 }
