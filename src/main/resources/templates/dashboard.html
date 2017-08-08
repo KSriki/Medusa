@@ -19,7 +19,7 @@
     
    <span th:text=" ${user.firstName}" ></span>  <span th:text=" ${user.lastName}" ></span>
     	
-    <div sec:authentication="hasAuthority('APP')">
+    <div sec:authorize="hasAuthority('APP')">
     
     	<p>Shown only to Applicant </p>
     	<p><a href="/userprofile">My Profile</a></p>    
@@ -27,11 +27,11 @@
     	<p><a href="/myprograms">My Programs</a></p>
     </div>
     
-    <div sec:authentication="hasAuthority('PADMIN')">
+    <div sec:authorize="hasAuthority('PADMIN')">
     	<p>Shown only to Program Admin</p>
     </div>
     
-    <div sec:authentication="hasAuthority('SADMIN')">
+    <div sec:authorize="hasAuthority('SADMIN')">
     	<p>Shown only to Site Admin</p>
     </div>
   
