@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org "
+	xmlns:sec="www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Application</title>
+</head>
+<body>
+<div class="container">
+	<h1 th:text="${programName}"></h1>
+	<div class="question-content">
+		<h4 th:text="${question.content}"></h4>
+		<div class="response-form" th:if="${#strings.equals(question.type,'PA')}">
+			<form action="#" th:action="@{/next}" th:object="${response}" method="post">
+				<textarea id="content" th:field=*{content}"></textarea>
+				<input type="hidden" name="question" th:value="${question.id}" />
+				<input type="hidden" name="application" th:value="${app.id}" />
+				<button class="btn btn-block" type="submit">Next</button>
+			</form>
+		</div>
+		<div class="response-form" th:if="${#strings.equals(question.type,'SA')}">
+			<form action="#" th:action="@{/next}" th:object="${response}" method="post">
+				<input type="text" id="content" th:field="*{content}" />
+				<input type="hidden" name="question" th:value="${question.id}" />
+				<input type="hidden" name="application" th:value="${app.id}" />
+				<button class="btn btn-block" type="submit">Next</button>
+			</form>
+		</div>
+		<div class="response-form" th:if="${#strings.equals(question.type,'MC')}">
+			<form action="#" th:action="@{/next}" th:object="${response}" method="post">
+				<ul>
+					<li th:each="choice : ${choices}">
+						<input type="radio" th:field="*{content}" th:value="${choice}" />
+					</li>
+				</ul>
+				<input type="hidden" name="question" th:value="${question.id}" />
+				<input type="hidden" name="application" th:value="${app.id}" />
+				<button class="btn btn-block" type="submit">Next</button>
+			</form>
+		</div>
+		<div class="response-form" th:if="${#strings.equals(question.type,'MS')}">
+			<form action="#" th:action="@{/next}" th:object="${response}" method="post">
+				<ul>
+					<li th:each="choice : ${choices}">
+						<input type="checkbox" th:field="*{content}" th:value="${choice}" />
+					</li>
+				</ul>
+				<input type="hidden" name="question" th:value="${question.id}" />
+				<input type="hidden" name="application" th:value="${app.id}" />
+				<button class="btn btn-block" type="submit">Next</button>
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>
