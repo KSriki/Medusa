@@ -16,20 +16,20 @@ import medusa.services.ProgramService;
 @Controller
 public class ApplicantProgramsController {
 
-	@Autowired
-	private ProgramService programService;
-	@Autowired
-	private ApplicationService applicationService;
-	
-	@RequestMapping(value="/browseprograms", method = RequestMethod.GET)
-	public String browsePrograms(Model model) {
-		List<Program> programs = programService.programs();
-		List<Long> counts = new ArrayList<Long>();
-		for (Program program: programs) {
-			counts.add(applicationService.countByProgramAndStatus(program, "enrolled"));
-		}
-		model.addAttribute("programs", programs);
-		model.addAttribute("counts", counts);
-		return "browseprograms";
-	}
+//	@Autowired
+//	private ProgramService programService;
+//	@Autowired
+//	private ApplicationService applicationService;
+//	
+//	@RequestMapping(value="/browseprograms", method = RequestMethod.GET)
+//	public String browsePrograms(Model model) {
+//		List<Program> programs = programService.programs();
+//		List<Long> counts = new ArrayList<Long>();
+//		for (Program program: programs) {
+//			counts.add(applicationService.countByProgramAndStatus(program, "enrolled"));
+//		}
+//		model.addAttribute("programs", programs);
+//		model.addAttribute("counts", counts);
+//		return "browseprograms";
+//	}
 }

@@ -32,12 +32,12 @@ public class College {
 	@Column(name="active")
 	private String active;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH})
+	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH})
 	@JoinTable(joinColumns = @JoinColumn(name = "collegeId"),inverseJoinColumns = @JoinColumn(name = "programId"))
 	private List<Program> programs;
 
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(joinColumns = @JoinColumn(name = "collegeId"),inverseJoinColumns = @JoinColumn(name = "userId"))
 	private List<User> users;
 
