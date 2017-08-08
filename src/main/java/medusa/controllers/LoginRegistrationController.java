@@ -12,7 +12,10 @@ public class LoginRegistrationController {
     public String login(){
         return "login";
     }
-}  
+	
+	
+} 
+
   //  @RequestMapping("/userprofile")
    // public String userprofile(Principal principal,Model model){
     //	User user = userService.findByUsername(principal.getName());

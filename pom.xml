@@ -67,6 +67,16 @@
 			<artifactId>nekohtml</artifactId>
 			<version>1.9.21</version>
 			</dependency>
+			<dependency>
+    	<groupId>it.ozimov</groupId>
+    	<artifactId>spring-boot-email-core</artifactId>
+    	<version>0.6.2</version>
+		</dependency>
+		<dependency>
+    	<groupId>it.ozimov</groupId>
+    	<artifactId>spring-boot-thymeleaf-email</artifactId>
+    	<version>0.6.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>
