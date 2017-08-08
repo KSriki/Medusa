@@ -1,5 +1,6 @@
 package medusa.controllers;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import medusa.models.Program;
+import medusa.models.User;
 import medusa.services.ApplicationService;
 import medusa.services.ProgramService;
 import medusa.services.UserService;
@@ -40,10 +42,11 @@ public class ApplicantDashboardController {
 	
 	//method is post for when we get specific user from form after logging in
 	@RequestMapping(value="/applicantdashboard")  //,method=RequestMethod.POST)
-	public String showDashboard(Model model) {
+	public String showDashboard(Principal principal, Model model) {
 		//display user's name on dashboard page apart from
 		//model.addAttribute("user", new User());
-		
+		User user = userService.findByUsername(principal.getName());
+		model.addAttribute("user", user);
 		//choose type of user for dashboard here ? with requestmapping for generic "dashboard" ?
 		//add selector code
 		
@@ -51,10 +54,25 @@ public class ApplicantDashboardController {
 	}
 
 
-	@RequestMapping(value="/myprofile")
-	public String showProfile(Model model) {
+	@RequestMapping(value="/myprofile", method= RequestMethod.GET)
+	public String showProfile(Principal principal,Model model) {
+		User user = userService.findByUsername(principal.getName());
+		model.addAttribute("user", user);
 		return "myprofile";
 	}
+	
+
+
+	@RequestMapping(value="/myprofile", method= RequestMethod.POST)
+	public String editProfile(Principal principal,Model model) {
+		
+		
+		
+		User user = userService.findByUsername(principal.getName());
+		model.addAttribute("user", user);
+		return "myprofile";
+	}
+	
 	
 	@RequestMapping(value="/myprograms")
 	public String showMyPrograms(Model model) {

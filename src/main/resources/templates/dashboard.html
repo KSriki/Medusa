@@ -16,7 +16,8 @@
         <h1>My Dashboard</h1>
         <p class="lead"> Welcome to your Medusa Education Dashboard! </p>
     </div>
-    	
+    
+   <span th:text=" ${user.firstName}" ></span>  <span th:text=" ${user.lastName}" ></span>
     	
     <div sec:authentication="hasAuthority('APP')">
     

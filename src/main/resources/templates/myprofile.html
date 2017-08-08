@@ -1,12 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="www.thymeleaf.org " xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Applicant Profile</title>
+    <!-- <th:block th:replace="base :: head"></th:block> -->
 </head>
 <body>
 
 Hello Applicant this is your profile
+
+ 	<div th:if="${param.error}">
+       Invalid input, cannot edit profile.
+   </div>
+    
+    <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title"  th:text="${user.username}"> </h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="http://res.cloudinary.com/dcbfgnikn/image/upload/v1501164019/anonymous-user-646f5626364f04cb725621cdc9f0768e_rqvok5.png" class="img-circle img-responsive"> </div>
+                
+         
+                <div class=" col-md-9 col-lg-9 "> 
+                <form action="/myprofile" method="post">
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr>
+                      
+                      <span> if applicant can't change the role, add sec auth here</span>
+               
+               			<td>Role:</td>
+                        <td><p class="lead" th:text="${user.role}" id="userrole" name="userrole"></p></td>
+                      </tr>
+                      <tr>
+                        <td>Username:</td>
+                        <td><input type="text" class="lead" th:value="${user.username}" id="uname" name="uname"/></td>
+                      </tr>
+                      <tr>
+                        <td>User ID:</td>
+                        <td><input type="number" min="1" class="lead" th:value="${user.id}" id="userid" name="userid"/></td>
+                      </tr>
+                      <tr>
+                        <td>Email</td>
+                        <td><input type="email" class="lead" th:value="${user.email}" id="useremail" name="useremail"/></td>
+                      </tr>
+                   
+                         <tr>
+                             <tr>
+                        <td>First Name</td>
+                        <td><input type="text" class="lead" th:value="${user.firstName}" id="userfirst" name="userfirst"></td>
+                      </tr>
+                        <tr>
+                        <td>Last Name</td>
+                        <td><input type="text" class="lead" th:value="${user.lastName}" id="userlast" name="userlast"></td>
+                      </tr>
+                     <tr>
+                     
+                     
+                    </tbody>
+                  </table>
+                  </form>
+                  
+              </div>
+            </div>
+            
+          </div>
+        </div>
 
 </body>
 </html>
