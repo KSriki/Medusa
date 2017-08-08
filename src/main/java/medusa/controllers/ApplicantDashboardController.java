@@ -54,29 +54,23 @@ public class ApplicantDashboardController {
 		return "dashboard";
 	}
 
-//
-//	@RequestMapping(value="/myprofile", method= RequestMethod.GET)
-//	public String showProfile(Principal principal,Model model) {
-//		User user = userService.findByUsername(principal.getName());
-//		model.addAttribute("user", user);
-//		return "myprofile";
-//	}
-//	
-//
-//
-//	@RequestMapping(value="/myprofile", method= RequestMethod.POST)
-//	public String editProfile(Principal principal,Model model) {
-//		
-//		
-//		
-//		User user = userService.findByUsername(principal.getName());
-//		model.addAttribute("user", user);
-//		return "myprofile";
-//	}
 	
-	
-	@RequestMapping(value="/myprograms")
-	public String showMyPrograms(Model model) {
+	@RequestMapping(value="/myprograms", method=RequestMethod.GET)
+	public String showMyPrograms(Principal principal, Model model) {
+		
+		
+		User user = userService.findByUsername(principal.getName());
+		List<User> findThisUser = new ArrayList<User>();
+		findThisUser.add(user);
+		List<Program> programs = programService.findByActiveAndUsersIn("true", findThisUser);
+		List<Long> counts = new ArrayList<Long>();
+		System.out.println(programs);
+		for (Program program: programs) {
+			counts.add(applicationService.countByProgramAndStatus(program, "enrolled"));
+		}
+		model.addAttribute("programs", programs);
+		model.addAttribute("counts", counts);
+		
 		return "myprograms";
 	}
 	
