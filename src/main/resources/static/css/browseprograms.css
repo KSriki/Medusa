@@ -1,0 +1,31 @@
+.program-container {
+	width: 60%;
+	margin: 20px auto;
+	background-color: #e0eef5;
+	border: 1px solid black;
+}
+
+.row {
+	overflow: auto;
+}
+
+.course-name, .course-schedule, .course-college-deadline {
+	float: left;
+	margin-left: 15px;
+}
+
+.course-apply, .course-admins, .course-enrollment-range {
+	float: right;
+	margin-right: 15px;
+}
+
+.course-apply {
+	margin-top: 15px;
+}
+
+.course-description {
+	margin: 0 auto;
+	border: 1px solid black;
+	width: 80%;
+	text-align: center;
+}
