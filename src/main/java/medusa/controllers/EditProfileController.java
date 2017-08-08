@@ -1,7 +1,9 @@
 package medusa.controllers;
 
+import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 
+import javax.mail.internet.InternetAddress;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.google.common.collect.Lists;
+
+import it.ozimov.springboot.mail.model.Email;
+import it.ozimov.springboot.mail.model.defaultimpl.DefaultEmail;
+import it.ozimov.springboot.mail.service.EmailService;
 import medusa.models.User;
 import medusa.services.UserService;
 
@@ -21,6 +28,9 @@ import medusa.services.UserService;
 public class EditProfileController {
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	public EmailService emailService;
 	
     @RequestMapping(value = "/editprofile", method = RequestMethod.GET)
 	public String editProfile(Principal principal, Model model) {
@@ -66,7 +76,7 @@ public class EditProfileController {
    	}
     
     @RequestMapping(value = "/passwordchange",method = RequestMethod.POST)
-	public String processedpassword(Principal principal,@Valid @ModelAttribute("user") User user, BindingResult result, Model model,@RequestParam("old_pass") String old_pass,@RequestParam("new_pass") String new_pass,@RequestParam("confirm_new_pass") String confirm_new_pass) {	
+	public String processedpassword(Principal principal,@Valid @ModelAttribute("user") User user, BindingResult result, Model model,@RequestParam("old_pass") String old_pass,@RequestParam("new_pass") String new_pass,@RequestParam("confirm_new_pass") String confirm_new_pass) throws UnsupportedEncodingException {	
     	model.addAttribute("user", user);
     	User edituser=userService.findByUsername(principal.getName());
     	System.out.println(edituser.getPassword());
@@ -85,9 +95,28 @@ public class EditProfileController {
         	user.setEmail(edituser.getEmail());
             userService.saveUser(user);
             model.addAttribute("message", "User Account Successfully Created");
+            sendEmailWithoutTemplating_passchange(user.getUsername(),user.getEmail());
         }
         return "userprofile";
 	}
+    
+    public void sendEmailWithoutTemplating_passchange(String username,String useremail) throws UnsupportedEncodingException{
+
+		  final Email email = DefaultEmail.builder()
+
+		        .from(new InternetAddress("samazon.infosys@gmail.com", "Medusa Admin"))
+
+		        .to(Lists.newArrayList(new InternetAddress(useremail, username)))
+
+		        .subject("Your Password Change in Medusa")
+
+		        .body("Hello "+username+", You have changed your password in Medusa Educaion Platform. Please log in with your new password.")
+
+		        .encoding("UTF-8").build();
+
+		  emailService.send(email);
+
+		}
     
     
 }
