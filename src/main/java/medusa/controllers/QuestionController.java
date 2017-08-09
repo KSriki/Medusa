@@ -1,5 +1,7 @@
 package medusa.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,14 @@ public class QuestionController {
     	questionService.saveQuestion(question);
     	programService.saveProgram(prog);
     	return "addedquestion";
+    }
+    
+    @RequestMapping(value="/viewquestions", method = RequestMethod.POST)
+    public String viewQuestions(@Valid @ModelAttribute("program") Program program, Model model) {
+    	List<Question> questions = program.getQuestions();
+    	model.addAttribute("questions", questions);
+    	model.addAttribute("program", program);
+    	return "viewquestions";
     }
 	
 }
