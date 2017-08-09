@@ -28,4 +28,9 @@ public class ApplicationService {
     public Application findByProgramAndUser(Program program, User user) {
     	return applicationRepository.findByProgramAndUser(program, user);
     }
+    
+    public Application findById(Long id) {
+    	return applicationRepository.findById(id);
+    }
+
 }

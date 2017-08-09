@@ -16,21 +16,6 @@
 					<p th:text="${'Course: ' + program.name}"></p>
 					<p th:text="${'ID: ' + program.id}"></p>
 				</div>
-				<div class="course-apply">
-					<form action="#" th:action="@{apply}" th:object="${program}" method="post">
-						<input type="hidden" name="id" th:value="${program.id}" />
-						<input type="hidden" name="name" th:value="${program.name}" />
-						<input type="hidden" name="description" th:value="${program.description}" />
-						<input type="hidden" name="startDate" th:value="${program.startDate}" />
-						<input type="hidden" name="endDate" th:value="${program.endDate}" />
-						<input type="hidden" name="classSize" th:value="${program.classSize}" />
-						<input type="hidden" name="active" th:value="${program.active}" />
-						<input type="hidden" name="open" th:value="${program.open}" />
-						<input type="hidden" name="deadline" th:value="${program.deadline}" />
-						<input type="hidden" name="schedule" th:value="${program.schedule}" />
-						<input type="hidden" name="college" th:value="${program.college.id}" />
-					</form>
-				</div>
 			</div>
 			<div class="row">
 				<div class="course-schedule">

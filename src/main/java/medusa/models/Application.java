@@ -40,6 +40,15 @@ public class Application {
 	@Column(name = "dateApplied")
 	private Date dateApplied;
 	
+	
+	public Application(String stat, Program prog,User u, List<Response> resp, Date dApp) {
+		status = stat;
+		program = prog;
+		user = u;
+		responses = resp;
+		dateApplied = dApp;
+	}
+	
 	public Application() {
 		status = "open";
 	}

@@ -71,7 +71,6 @@ public class ApplicantDashboardController {
 		
 		User user = userService.findByUsername(principal.getName());
 
-		
 		List<Application> apps = user.getApplications();
 		List<Program> progs = new ArrayList<Program>();
 		List<Long> counts = new ArrayList<Long>();
