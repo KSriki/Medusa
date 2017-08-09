@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import medusa.models.Program;
 import medusa.models.Question;
@@ -28,18 +29,16 @@ public class QuestionController {
 	@Autowired
 	private ProgramService programService;
 	
-	@RequestMapping(value="/addquestion", method = RequestMethod.GET)
-    public String addQuestion(Model model) {
-		System.out.println("helllllllo");
+	@RequestMapping(value="/createquestion", method = RequestMethod.POST)
+    public String addQuestion(Model model, @Valid @ModelAttribute("program") Program program) {
     	model.addAttribute("question",new Question());
+    	model.addAttribute("program", program);
     	return "addquestion";
     }
     
     @RequestMapping(value="/addquestion", method = RequestMethod.POST)
-    public String addedQuestion(@Valid @ModelAttribute("question") Question question) {
-    	Program prog = programService.findById(3);
-    	System.out.println(prog);
-    	System.out.println(question);
+    public String addedQuestion(@Valid @ModelAttribute("question") Question question, @RequestParam("program") String name) {
+    	Program prog = programService.findByName(name);
     	question.addProgram(prog);
     	prog.addQuestion(question);
     	questionService.saveQuestion(question);
@@ -49,7 +48,9 @@ public class QuestionController {
     
     @RequestMapping(value="/viewquestions", method = RequestMethod.POST)
     public String viewQuestions(@Valid @ModelAttribute("program") Program program, Model model) {
-    	List<Question> questions = program.getQuestions();
+    	System.out.println(program);
+    	System.out.println(programService.findByName(program.getName()).getQuestions());
+    	List<Question> questions = programService.findByName(program.getName()).getQuestions();
     	model.addAttribute("questions", questions);
     	model.addAttribute("program", program);
     	return "viewquestions";
