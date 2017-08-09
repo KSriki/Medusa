@@ -87,20 +87,21 @@ public class ApplicantProgramsController {
 	@RequestMapping(value = "/apply", method = RequestMethod.POST)
 	public String apply(Model model, @Valid @ModelAttribute("program") Program program, Principal principal) {
 		User user = userService.findByUsername(principal.getName());
-		System.out.println(program);
 		model.addAttribute("programName", program.getName());
 		model.addAttribute("response", new Response());
-		Application app = new Application();
-		app.setUser(user);
-		app.setProgram(program);
-		program.addApplication(app);
-		user.addApplication(app);
-		applicationService.saveApplication(app);
-		userService.saveAdmin(user);
-		programService.saveProgram(program);
+		Application app = applicationService.findByProgramAndUser(program, user);
+		if (app == null) {
+			app = new Application();
+			app.setUser(user);
+			app.setProgram(program);
+			program.addApplication(app);
+			user.addApplication(app);
+			applicationService.saveApplication(app);
+			userService.saveAdmin(user);
+			programService.saveProgram(program);
+		}
 		model.addAttribute("app", app);
 		Question question = findNextQuestion(program, user);
-		System.out.println(question.getType());
 		model.addAttribute("question", question);
 		if (question.getType().equals("MC") || question.getType().equals("MS")) {
 			List<String> choices = new ArrayList<String>(Arrays.asList(question.getChoices().split("\\|")));
