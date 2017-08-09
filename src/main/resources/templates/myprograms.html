@@ -23,14 +23,15 @@ hello world
 					<p th:text="${'Course: ' + app.program.name}"></p>
 					<p th:text="${'ID: ' + app.program.id}"></p>
 				</div>
+				<div style="text-align: right">
+				<button th:text="${app.status}"></button>
+				<p th:text="'Date Applied: ' + ${app.dateApplied}"></p>
+				
+				</div>
 			
 			</div>
 			<div class="row">
-				<div>
-					
-					Should we add date enrolled/accepted here?
-					
-				</div>
+				
 				<div class="course-schedule">
 					<p th:text="${app.program.schedule}"></p>
 				</div>
@@ -53,11 +54,11 @@ hello world
 				<div class="course-enrollment-range">
 					<p th:text="${'Students Enrolled: ' + counts[index] + '/' + app.program.classSize}"></p>
 					<p th:text="${app.program.startDate + ' - ' + app.program.endDate}"></p>
-					<p th:text="'Date Applied: ' + ${app.dateApplied}"></p>
+					
 					
 				</div>
 				<div>
-					<button th:text="${app.status}"></button>
+					
 				
 				</div>
 			</div>

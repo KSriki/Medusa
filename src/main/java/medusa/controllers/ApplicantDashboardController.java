@@ -91,7 +91,7 @@ public class ApplicantDashboardController {
 //				
 //			
 //			}
-//			else {
+//			else { 
 //				mylist.get(a.getProgram()).add(a);
 //			}
 			
@@ -100,6 +100,7 @@ public class ApplicantDashboardController {
 		
 
 		model.addAttribute("apps",apps);
+		model.addAttribute("counts",counts);
 	//	model.addAttribute("size",size);
 	
 		return "myprograms";
