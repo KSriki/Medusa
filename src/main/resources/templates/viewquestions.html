@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org "
+	xmlns:sec="www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Questions</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+</head>
+<body>
+<div class="container">
+	<table class="table-responsive table-hover table-bordered" id="questions-list" style="width:100%">
+		<tr>
+			<th>ID</th>
+			<th>Question</th>
+			<th>Type</th>
+			<th>Choices</th>
+			<th></th>
+			<th></th>
+		</tr>
+		<th:block th:each="question : ${questions}">
+			<tr th:if="${#strings.equals(question.active,'true')}">
+				<td th:text="${question.id}"></td>
+				<td th:text="${question.content}"></td>
+				<td th:text="${question.type}"></td>
+				<td th:text="${qeustion.choices}"></td>
+				<td>
+					<form th:action="@{/viewresponses}" th:object="${question}" method="post">
+						<input type="hidden" name="id" th:value="${question.id}" />
+						<input type="hidden" name="content" th:value="${question.content}" />
+						<input type="hidden" name="active" th:value="${question.active}" />
+						<input type="hidden" name="type" th:value="${question.type}" />
+						<input type="hidden" name="choices" th:value="${question.choices}" />
+						<button class="btn btn-block" type="submit">View Responses</button>
+					</form>
+				</td>
+				<td>
+					<form th:action="@{/removequestion}" th:object="${question}" method="post">
+						<input type="hidden" name="id" th:value="${question.id}" />
+						<input type="hidden" name="content" th:value="${question.content}" />
+						<input type="hidden" name="active" th:value="${question.active}" />
+						<input type="hidden" name="type" th:value="${question.type}" />
+						<input type="hidden" name="choices" th:value="${question.choices}" />
+						<button class="btn btn-block btn-danger" type="submit">Remove</button>
+					</form>
+				</td>
+			</tr>
+		</th:block>
+	</table>
+	<form th:action="@{/createquestion}" th:object="${program}" method="post">
+		<input type="hidden" name="id" th:value="${program.id}" />
+		<input type="hidden" name="name" th:value="${program.name}" />
+		<input type="hidden" name="description" th:value="${program.description}" />
+		<input type="hidden" name="startDate" th:value="${program.startDate}" />
+		<input type="hidden" name="endDate" th:value="${program.endDate}" />
+		<input type="hidden" name="classSize" th:value="${program.classSize}" />
+		<input type="hidden" name="active" th:value="${program.active}" />
+		<input type="hidden" name="open" th:value="${program.open}" />
+		<input type="hidden" name="deadline" th:value="${program.deadline}" />
+		<input type="hidden" name="schedule" th:value="${program.schedule}" />
+		<input type="hidden" name="college" th:value="${program.college.id}" />
+		<button class="btn btn-block" type="submit">Add New Question</button>
+	</form>
+</div>
+</body>
+</html>
