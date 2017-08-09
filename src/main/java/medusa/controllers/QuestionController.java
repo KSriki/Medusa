@@ -35,7 +35,7 @@ public class QuestionController {
     
     @RequestMapping(value="/addquestion", method = RequestMethod.POST)
     public String addedQuestion(@Valid @ModelAttribute("question") Question question) {
-    	Program prog = programService.findById(1);
+    	Program prog = programService.findById(3);
     	System.out.println(prog);
     	System.out.println(question);
     	question.addProgram(prog);
