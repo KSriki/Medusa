@@ -51,14 +51,15 @@ public class HomeController {
         userlist.put("PADMIN", "PADMIN");
         userlist.put("SADMIN","SADMIN");
         model.addAttribute("userlist",userlist);
+        model.addAttribute("uselect","APP");
         return "registration";
     }
     @RequestMapping(value="/register", method = RequestMethod.POST)
-    public String processRegistrationPage(@Valid @ModelAttribute("user") User user, BindingResult result, Model model,@RequestParam("userlistselect") String uselect) throws UnsupportedEncodingException{
+    public String processRegistrationPage(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) throws UnsupportedEncodingException{
         model.addAttribute("user", user);
         userValidator.validate(user, result);
         if (result.hasErrors()) {
-        	System.out.println(uselect);
+        	//System.out.println(uselect);
             return "registration";
         } else {
             userService.saveUser(user);
