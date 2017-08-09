@@ -36,7 +36,9 @@ public class ApplicantDashboardController {
 		List<Program> programs = programService.programs();
 		List<Program> applied = new ArrayList<Program>();
 		for (Application app: user.getApplications()) {
-			applied.add(app.getProgram());
+			if (!app.getStatus().equals("open")) {
+				applied.add(app.getProgram());
+			}
 		}
 		programs.removeAll(applied);
 		List<Long> counts = new ArrayList<Long>();
