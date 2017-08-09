@@ -1,0 +1,71 @@
+<!DOCTYPE html> 
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Program Admin: My Program</title>
+<link rel="stylesheet" href="/css/browseprograms.css"></link>
+</head>
+<body>
+	<h1>My Programs</h1>
+
+	<th:block th:each="index : ${#numbers.sequence(0, #arrays.length(programs) - 1)}">
+		<div th:with="program=${programs[index]}">
+		
+			<p th:text="${'Program: ' + program.name}"></p>
+		</div>
+	</th:block>
+
+
+
+<!-- 	<th:block th:each="index : ${#numbers.sequence( 0, #arrays.length(apps)-1)}"> -->
+<!-- 		<div class="program-container" th:with="app=${apps[index]}" th:if="${not #strings.equals(apps[index].program.name,'universal')}"> -->
+<!-- 			<div class="row"> -->
+<!-- 				<div class="course-name"> -->
+<!-- 					<p th:text="${'Course: ' + app.program.name}"></p> -->
+<!-- 					<p th:text="${'ID: ' + app.program.id}"></p> -->
+<!-- 				</div> -->
+			
+<!-- 			</div> -->
+<!-- 			<div class="row"> -->
+<!-- 				<div> -->
+					
+<!-- 					Should we add date enrolled/accepted here? -->
+					
+<!-- 				</div> -->
+<!-- 				<div class="course-schedule"> -->
+<!-- 					<p th:text="${app.program.schedule}"></p> -->
+<!-- 				</div> -->
+<!-- 				<div class="course-admins"> -->
+<!-- 					<p>Program Admin(s)</p> -->
+<!-- 					<th:block th:each="progAdmin : ${app.program.users}"> -->
+<!-- 						<p th:text="${progAdmin.firstName + ' ' + progAdmin.lastName}"></p> -->
+<!-- 					</th:block> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+			
+<!-- 			<div class="course-description"> -->
+<!-- 				<p th:text="${app.program.description}"></p> -->
+<!-- 			</div> -->
+<!-- 				<div class="row"> -->
+<!-- 					<div class="course-college-deadline"> -->
+<!-- 					<p th:text="${app.program.college.name}"></p> -->
+<!-- 					<p th:text="${'Deadline: ' + app.program.deadline}"></p> -->
+<!-- 				</div> -->
+<!-- 				<div class="course-enrollment-range"> -->
+<!-- 					<p th:text="${'Students Enrolled: ' + counts[index] + '/' + app.program.classSize}"></p> -->
+<!-- 					<p th:text="${app.program.startDate + ' - ' + app.program.endDate}"></p> -->
+<!-- 					<p th:text="'Date Applied: ' + ${app.dateApplied}"></p> -->
+					
+<!-- 				</div> -->
+<!-- 				<div> -->
+<!-- 					<button th:text="${app.status}"></button> -->
+				
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</th:block> -->
+
+	
+
+</body>
+</html>

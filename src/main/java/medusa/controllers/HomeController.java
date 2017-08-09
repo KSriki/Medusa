@@ -35,8 +35,6 @@ public class HomeController {
 	@Autowired
 	public EmailService emailService;
 	
-	
-	
 	/*
 	 * Change to dynamically choose which dashboard depending on sec-auth
 	 * 
