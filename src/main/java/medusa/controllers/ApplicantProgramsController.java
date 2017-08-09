@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -126,6 +127,35 @@ public class ApplicantProgramsController {
 			model.addAttribute("choices", choices);
 		}
 		return "apply";
+	}
+	
+
+	@RequestMapping(value = "/enroll", method = RequestMethod.POST)
+	public String enroll(Model model, @Valid @ModelAttribute("app") Application app, Principal principal, BindingResult result) {
+//		Application app = applicationService.findById(id);
+		//actual application
+		Application toEnroll = applicationService.findById(app.getId());
+		
+		//actual user
+		
+		User loggedin = userService.findByUsername(principal.getName());
+		//should get the user by the application since xss/csrf
+	
+		User user = toEnroll.getUser();
+		if (app == null || loggedin == null || !loggedin.getUsername().equals(user.getUsername())) {
+			 return "myprograms";
+		}
+		
+		//actual program
+		//Program program = toEnroll.getProgram();
+		
+		toEnroll.setStatus("enrolled");
+	
+		applicationService.saveApplication(toEnroll);
+		
+		model.addAttribute("app", app);
+		model.addAttribute("userapp",user);
+		return "enroll";
 	}
 	
 	@RequestMapping(value="/next", method=RequestMethod.POST)
