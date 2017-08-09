@@ -8,7 +8,8 @@
 </head>
 <body>
 <div class="container">
-	<table class="table-responsive table-hover table-bordered" id="questions-list" style="width:100%">
+	<h1 th:text="${program.name}"></h1>
+	<table class="table-responsive table-hover table-bordered" id="questions-list" style="width:100%;margin-bottom:20px;">
 		<tr>
 			<th>ID</th>
 			<th>Question</th>
@@ -22,7 +23,7 @@
 				<td th:text="${question.id}"></td>
 				<td th:text="${question.content}"></td>
 				<td th:text="${question.type}"></td>
-				<td th:text="${qeustion.choices}"></td>
+				<td th:text="${question.choices}"></td>
 				<td>
 					<form th:action="@{/viewresponses}" th:object="${question}" method="post">
 						<input type="hidden" name="id" th:value="${question.id}" />

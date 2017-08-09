@@ -7,10 +7,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Effort Login</title>
-    <th:block th:replace="base :: head"></th:block>
+    <th:block th:replace="base :: head"></th:block> 
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+a {font-size: 250%;
+	text-decoration: underline;}
+img {display:block !important; visibility:visible}
+body {font-family: "Times New Roman", Georgia, Serif;} 
+h1,h2,h3,h4,h5,h6 { 
+  font-family: "Playfair Display"; 
+  letter-spacing: 5px; 
+ } 
+p{font-size: 100%;}
+</style> 
 </head>
 <body>
-<th:block th:replace="base :: nav"></th:block>
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-padding w3-card-2" style="letter-spacing:4px;">
+    <a href="/" class="w3-bar-item w3-button">Medusa Education</a>
+ 
+    <div class="w3-right w3-hide-small">
+<!--     <a href="login.jsp" class="w3-bar-item w3-button">Log in</a> -->
+	  <a href="/login" class="w3-bar-item w3-button" style="size:5">log in</a> 
+      <a href="/register" class="w3-bar-item w3-button">Registration</a>
+<!--       <a href="contactSection.html" class="w3-bar-item w3-button">Contact</a> -->
+    </div>
+  </div>
+</div>
+<br /><br /><br /><br /><br /><br />
 <div class="container">
     <br /><br /><br />
     <div th:if="${param.error}">
@@ -20,12 +44,12 @@
         You have been logged out.
     </div>
     <form th:action="@{/login}" method="post">
-        <div><label> Username: <input type="text" name="username"/> </label></div>
-        <div><label> Password: <input type="password" name="password"/> </label></div>
+        <div><label style="font-size: 250%;"> Username: <input type="text" name="username"/> </label></div>
+        <div><label style="font-size: 250%;"> Password: <input type="password" name="password"/> </label></div>
         <div><input type="submit" value="Sign In"/></div>
     </form>
-     <div><a href="/register"><i>Don't have account with us? Register Now</i></a></div>
-     <div><a href="/passwordchange">forget your password? Click here!</a></div>
+     <div><a href="/registration" style="font-size: 150%;"><i>Don't have account with us? Register Now</i></a></div>
+     <div><a href="/passwordchange" style="font-size: 150%;">forget your password? Click here!</a></div>
     
 </div><!-- /.container -->
 
