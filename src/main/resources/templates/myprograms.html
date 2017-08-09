@@ -3,12 +3,19 @@
 	xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
-<title>Browse programs</title>
-<link rel="stylesheet" href="../css/browseprograms.css"></link>
+<title>My Programs</title>
+<link rel="stylesheet" href="/css/browseprograms.css"></link>
 </head>
 <body>
+hello world
+<span th:text="${programs.size()}"></span>
+<div class="container"  th:if="${#lists.isEmpty(programs)}">
+	No enrolled Programs.
+</div>
 <div class="container"  th:if="${not #lists.isEmpty(programs)}">
-	<h2>Products List</h2>
+
+
+	<h2>Program List</h2>
 	<th:block th:each="index : ${#numbers.sequence( 0, #arrays.length(programs)-1)}">
 		<div class="program-container" th:with="program=${programs[index]}" th:if="${not #strings.equals(programs[index].name,'universal')}">
 			<div class="row">
@@ -17,7 +24,7 @@
 					<p th:text="${'ID: ' + program.id}"></p>
 				</div>
 				<div class="course-apply">
-					<form action="#" th:action="@{apply}" th:object="${program}" method="post">
+				
 						<input type="hidden" name="id" th:value="${program.id}" />
 						<input type="hidden" name="name" th:value="${program.name}" />
 						<input type="hidden" name="description" th:value="${program.description}" />
@@ -29,11 +36,15 @@
 						<input type="hidden" name="deadline" th:value="${program.deadline}" />
 						<input type="hidden" name="schedule" th:value="${program.schedule}" />
 						<input type="hidden" name="college" th:value="${program.college.id}" />
-						<button class="btn btn-block" type="submit">Apply</button>
-					</form>
+					
+					<!-- Add something for enrolling in acepted application? -->	
 				</div>
 			</div>
 			<div class="row">
+				<div>
+					
+					Should we add date enrolled/accpeted here?
+				</div>
 				<div class="course-schedule">
 					<p th:text="${program.schedule}"></p>
 				</div>

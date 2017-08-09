@@ -1,5 +1,6 @@
 package medusa.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -47,6 +48,9 @@ public class Question {
 	
 	public Question() {
 		active = "true";
+		programs = new ArrayList<Program>();
+		responses = new ArrayList<Response>();
+		thresholds = new ArrayList<Threshold>();
 	}
 
 	public long getId() {

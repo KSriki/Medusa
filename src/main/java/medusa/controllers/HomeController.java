@@ -38,6 +38,15 @@ public class HomeController {
 	@Autowired
 	public EmailService emailService;
 	
+	
+	
+	/*
+	 * Change to dynamically choose which dashboard depending on sec-auth
+	 * 
+	 * 
+	 * 
+	 */
+	
 	@RequestMapping("/")
 	   public String index(Model model){
 	        return "homepage";
@@ -62,6 +71,8 @@ public class HomeController {
         	//System.out.println(uselect);
             return "registration";
         } else {
+        	user.setRole("APP");
+        	System.out.println(user.getRole());
             userService.saveUser(user);
             model.addAttribute("message", "User Account Successfully Created");
             sendEmailWithoutTemplating_reg(user.getUsername(),user.getEmail());
@@ -81,7 +92,18 @@ public class HomeController {
     public String login(){
         return "login";
     }
-	
+    
+    
+    /*
+     * Change for sec auth, so it doesnt show up if user is already logged in
+     * 
+     * 
+     */
+//    @RequestMapping(value="/login", method = RequestMethod.POST)
+//    public String successfulLogin(Model model){
+//    	
+//        return "dashboard";
+//    }
     
     public void sendEmailWithoutTemplating_reg(String username,String useremail) throws UnsupportedEncodingException{
 

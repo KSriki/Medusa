@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import medusa.models.Application;
 import medusa.models.Program;
 import medusa.models.User;
 import medusa.services.ApplicationService;
@@ -29,8 +30,14 @@ public class ApplicantDashboardController {
 	private ApplicationService applicationService;
 	
 	@RequestMapping(value="/browseprograms", method = RequestMethod.GET)
-	public String browsePrograms(Model model) {
+	public String browsePrograms(Model model, Principal principal) {
+		User user = userService.findByUsername(principal.getName());
 		List<Program> programs = programService.programs();
+		List<Program> applied = new ArrayList<Program>();
+		for (Application app: user.getApplications()) {
+			applied.add(app.getProgram());
+		}
+		programs.removeAll(applied);
 		List<Long> counts = new ArrayList<Long>();
 		System.out.println(programs);
 		for (Program program: programs) {
@@ -54,29 +61,28 @@ public class ApplicantDashboardController {
 		return "dashboard";
 	}
 
-//
-//	@RequestMapping(value="/myprofile", method= RequestMethod.GET)
-//	public String showProfile(Principal principal,Model model) {
-//		User user = userService.findByUsername(principal.getName());
-//		model.addAttribute("user", user);
-//		return "myprofile";
-//	}
-//	
-//
-//
-//	@RequestMapping(value="/myprofile", method= RequestMethod.POST)
-//	public String editProfile(Principal principal,Model model) {
-//		
-//		
-//		
-//		User user = userService.findByUsername(principal.getName());
-//		model.addAttribute("user", user);
-//		return "myprofile";
-//	}
 	
-	
-	@RequestMapping(value="/myprograms")
-	public String showMyPrograms(Model model) {
+	@RequestMapping(value="/myprograms", method=RequestMethod.GET)
+	public String showMyPrograms(Principal principal, Model model) {
+		
+		
+		User user = userService.findByUsername(principal.getName());
+		
+		List<Application> apps = user.getApplications();
+		List<Program> progs = new ArrayList<Program>();
+		List<Long> counts = new ArrayList<Long>();
+		for(Application a : apps) {
+			if(!progs.contains(a.getProgram())) {
+				progs.add(a.getProgram());
+				counts.add(applicationService.countByProgramAndStatus(a.getProgram(), "enrolled"));
+			}
+		}
+		
+		List<User> findThisUser = new ArrayList<User>();
+
+		model.addAttribute("programs", progs);
+		model.addAttribute("counts", counts);
+//		
 		return "myprograms";
 	}
 	

@@ -29,6 +29,10 @@
     
     <div sec:authorize="hasAuthority('PADMIN')">
     	<p>Shown only to Program Admin</p>
+    	<p><a href="/myprogramsp">My Programs</a></p>
+    	<p><a href="/viewallapplicants">View All Applicants</a></p>
+    	<p><a href="/autoaccept">Run Autoaccept</a></p>
+    	<p><a href="/browseprogramsp">Browse All Programs</a></p>
     </div>
     
     <div sec:authorize="hasAuthority('SADMIN')">
