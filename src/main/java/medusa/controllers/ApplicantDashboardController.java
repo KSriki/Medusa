@@ -2,6 +2,7 @@ package medusa.controllers;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +68,7 @@ public class ApplicantDashboardController {
 		
 		
 		User user = userService.findByUsername(principal.getName());
+
 		
 		List<Application> apps = user.getApplications();
 		List<Program> progs = new ArrayList<Program>();
@@ -75,15 +77,31 @@ public class ApplicantDashboardController {
 			if(!progs.contains(a.getProgram())) {
 				progs.add(a.getProgram());
 				counts.add(applicationService.countByProgramAndStatus(a.getProgram(), "enrolled"));
+
 			}
+			
+			counts.add(applicationService.countByProgramAndStatus(a.getProgram(), "enrolled"));
+//			if(!mylist.containsKey(a.getProgram())){
+//				
+//				ArrayList<Application> progApps = new ArrayList<Application>();
+//				progApps.add(a);
+//				mylist.put(a.getProgram(), progApps);
+//				
+//			
+//			}
+//			else {
+//				mylist.get(a.getProgram()).add(a);
+//			}
+			
+		//	size++;
 		}
 		
-		List<User> findThisUser = new ArrayList<User>();
 
-		model.addAttribute("programs", progs);
-		model.addAttribute("counts", counts);
-//		
+		model.addAttribute("apps",apps);
+	//	model.addAttribute("size",size);
+	
 		return "myprograms";
 	}
+	
 	
 }

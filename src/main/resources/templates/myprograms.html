@@ -9,64 +9,56 @@
 <body>
 hello world
 <span th:text="${programs.size()}"></span>
-<div class="container"  th:if="${#lists.isEmpty(programs)}">
-	No enrolled Programs.
+<div class="container"  th:if="${#lists.isEmpty(apps)}">
+	No Applications.
 </div>
-<div class="container"  th:if="${not #lists.isEmpty(programs)}">
+<div class="container"  th:if="${not #lists.isEmpty(apps)}">
 
 
-	<h2>Program List</h2>
-	<th:block th:each="index : ${#numbers.sequence( 0, #arrays.length(programs)-1)}">
-		<div class="program-container" th:with="program=${programs[index]}" th:if="${not #strings.equals(programs[index].name,'universal')}">
+	<h2>Applications</h2>
+	<th:block th:each="index : ${#numbers.sequence( 0, #arrays.length(apps)-1)}">
+		<div class="program-container" th:with="app=${apps[index]}" th:if="${not #strings.equals(apps[index].program.name,'universal')}">
 			<div class="row">
 				<div class="course-name">
-					<p th:text="${'Course: ' + program.name}"></p>
-					<p th:text="${'ID: ' + program.id}"></p>
+					<p th:text="${'Course: ' + app.program.name}"></p>
+					<p th:text="${'ID: ' + app.program.id}"></p>
 				</div>
-				<div class="course-apply">
-				
-						<input type="hidden" name="id" th:value="${program.id}" />
-						<input type="hidden" name="name" th:value="${program.name}" />
-						<input type="hidden" name="description" th:value="${program.description}" />
-						<input type="hidden" name="startDate" th:value="${program.startDate}" />
-						<input type="hidden" name="endDate" th:value="${program.endDate}" />
-						<input type="hidden" name="classSize" th:value="${program.classSize}" />
-						<input type="hidden" name="active" th:value="${program.active}" />
-						<input type="hidden" name="open" th:value="${program.open}" />
-						<input type="hidden" name="deadline" th:value="${program.deadline}" />
-						<input type="hidden" name="schedule" th:value="${program.schedule}" />
-						<input type="hidden" name="college" th:value="${program.college.id}" />
-					
-					<!-- Add something for enrolling in acepted application? -->	
-				</div>
+			
 			</div>
 			<div class="row">
 				<div>
 					
-					Should we add date enrolled/accpeted here?
+					Should we add date enrolled/accepted here?
+					
 				</div>
 				<div class="course-schedule">
-					<p th:text="${program.schedule}"></p>
+					<p th:text="${app.program.schedule}"></p>
 				</div>
 				<div class="course-admins">
 					<p>Program Admin(s)</p>
-					<th:block th:each="progAdmin : ${program.users}">
+					<th:block th:each="progAdmin : ${app.program.users}">
 						<p th:text="${progAdmin.firstName + ' ' + progAdmin.lastName}"></p>
 					</th:block>
 				</div>
 			</div>
 			
 			<div class="course-description">
-				<p th:text="${program.description}"></p>
+				<p th:text="${app.program.description}"></p>
 			</div>
 				<div class="row">
 					<div class="course-college-deadline">
-					<p th:text="${program.college.name}"></p>
-					<p th:text="${'Deadline: ' + program.deadline}"></p>
+					<p th:text="${app.program.college.name}"></p>
+					<p th:text="${'Deadline: ' + app.program.deadline}"></p>
 				</div>
 				<div class="course-enrollment-range">
-					<p th:text="${'Students Enrolled: ' + counts[index] + '/' + program.classSize}"></p>
-					<p th:text="${program.startDate + ' - ' + program.endDate}"></p>
+					<p th:text="${'Students Enrolled: ' + counts[index] + '/' + app.program.classSize}"></p>
+					<p th:text="${app.program.startDate + ' - ' + app.program.endDate}"></p>
+					<p th:text="'Date Applied: ' + ${app.dateApplied}"></p>
+					
+				</div>
+				<div>
+					<button th:text="${app.status}"></button>
+				
 				</div>
 			</div>
 		</div>
