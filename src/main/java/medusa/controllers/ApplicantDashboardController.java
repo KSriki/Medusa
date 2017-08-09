@@ -30,8 +30,14 @@ public class ApplicantDashboardController {
 	private ApplicationService applicationService;
 	
 	@RequestMapping(value="/browseprograms", method = RequestMethod.GET)
-	public String browsePrograms(Model model) {
+	public String browsePrograms(Model model, Principal principal) {
+		User user = userService.findByUsername(principal.getName());
 		List<Program> programs = programService.programs();
+		List<Program> applied = new ArrayList<Program>();
+		for (Application app: user.getApplications()) {
+			applied.add(app.getProgram());
+		}
+		programs.removeAll(applied);
 		List<Long> counts = new ArrayList<Long>();
 		System.out.println(programs);
 		for (Program program: programs) {
