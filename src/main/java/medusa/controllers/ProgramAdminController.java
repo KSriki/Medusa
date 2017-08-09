@@ -24,7 +24,7 @@ public class ProgramAdminController {
 	@Autowired
 	private ApplicationService applicationService;
 	
-	@RequestMapping(name="/browseprogramsp", method=RequestMethod.GET)
+	@RequestMapping(value="/browseprogramsp", method=RequestMethod.GET)
 	public String browsePrograms(Model model) {
 		List<Program> programs = programService.programs();
 		List<Long> counts = new ArrayList<Long>();

@@ -110,7 +110,7 @@ public class ApplicantProgramsController {
 		return "apply";
 	}
 	
-	@RequestMapping(name="/next", method=RequestMethod.POST)
+	@RequestMapping(value="/next", method=RequestMethod.POST)
 	public String next(Model model, @Valid @ModelAttribute("response") Response response, Principal principal) {
 		User user = userService.findByUsername(principal.getName());
 		Application app = response.getApplication();
