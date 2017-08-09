@@ -1,11 +1,13 @@
 package medusa.controllers;
 
+import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.mail.internet.InternetAddress;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.google.common.collect.Lists;
+
+import it.ozimov.springboot.mail.model.Email;
+import it.ozimov.springboot.mail.model.defaultimpl.DefaultEmail;
+import it.ozimov.springboot.mail.service.EmailService;
 import medusa.models.Application;
 import medusa.models.Program;
 import medusa.models.Question;
@@ -39,6 +46,8 @@ public class ApplicantProgramsController {
 	private ResponseService responseService;
 	@Autowired
 	private QuestionService questionService;
+	@Autowired
+	public EmailService emailService;
 //	
 //	@RequestMapping(value="/browseprograms", method = RequestMethod.GET)
 //	public String browsePrograms(Model model) {
@@ -85,7 +94,7 @@ public class ApplicantProgramsController {
 	}
 	
 	@RequestMapping(value = "/apply", method = RequestMethod.POST)
-	public String apply(Model model, @Valid @ModelAttribute("program") Program program, Principal principal) {
+	public String apply(Model model, @Valid @ModelAttribute("program") Program program, Principal principal) throws UnsupportedEncodingException {
 		User user = userService.findByUsername(principal.getName());
 		model.addAttribute("programName", program.getName());
 		model.addAttribute("response", new Response());
@@ -102,6 +111,15 @@ public class ApplicantProgramsController {
 		}
 		model.addAttribute("app", app);
 		Question question = findNextQuestion(program, user);
+		if(question==null)
+		{
+			app.setDateApplied(new Date(System.currentTimeMillis()));
+			app.setStatus("applied");
+			applicationService.saveApplication(app);
+			sendEmailWithoutTemplating_app(user.getUsername(),user.getEmail(),app.getProgram().getName());
+			return "completedapplication";
+			//return "redirect:/browseprograms";
+		}
 		model.addAttribute("question", question);
 		if (question.getType().equals("MC") || question.getType().equals("MS")) {
 			List<String> choices = new ArrayList<String>(Arrays.asList(question.getChoices().split("\\|")));
@@ -111,7 +129,7 @@ public class ApplicantProgramsController {
 	}
 	
 	@RequestMapping(value="/next", method=RequestMethod.POST)
-	public String next(Model model, @Valid @ModelAttribute("response") Response response, Principal principal) {
+	public String next(Model model, @Valid @ModelAttribute("response") Response response, Principal principal) throws UnsupportedEncodingException {
 		User user = userService.findByUsername(principal.getName());
 		Application app = response.getApplication();
 		app.addResponse(response);
@@ -136,7 +154,44 @@ public class ApplicantProgramsController {
 			app.setDateApplied(new Date(System.currentTimeMillis()));
 			app.setStatus("applied");
 			applicationService.saveApplication(app);
+			sendEmailWithoutTemplating_app(user.getUsername(),user.getEmail(),app.getProgram().getName());
 			return "completedapplication";
 		}
 	}
+	
+	public void sendEmailWithoutTemplating_app(String username,String useremail,String program) throws UnsupportedEncodingException{
+
+		  final Email email = DefaultEmail.builder()
+
+		        .from(new InternetAddress("samazon.infosys@gmail.com", "Medusa Admin"))
+
+		        .to(Lists.newArrayList(new InternetAddress(useremail, username)))
+
+		        .subject("Your Application Confirmation in Medusa")
+
+		        .body("Hello "+username+", Thanks for applying in "+program+" program in Medusa Educaion Platform.")
+
+		        .encoding("UTF-8").build();
+
+		  emailService.send(email);
+
+		}
+	
+	public void sendEmailWithoutTemplating_admin(String username,String useremail) throws UnsupportedEncodingException{
+
+		  final Email email = DefaultEmail.builder()
+
+		        .from(new InternetAddress("samazon.infosys@gmail.com", "Medusa Admin"))
+
+		        .to(Lists.newArrayList(new InternetAddress(useremail, username)))
+
+		        .subject("Your Registration in Medusa")
+
+		        .body("Hello "+username+", Thanks for Registering with Medusa Educaion Platform.")
+
+		        .encoding("UTF-8").build();
+
+		  emailService.send(email);
+
+		}
 }
