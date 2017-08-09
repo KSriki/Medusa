@@ -64,6 +64,8 @@ public class EditProfileController {
         	
        
         	user.setId(edituser.getId());
+        	user.setRole("APP");
+
         	user.setLastName(edituser.getLastName());
         	user.setUsername(edituser.getUsername());
         	user.setEmail(edituser.getEmail());
@@ -87,10 +89,10 @@ public class EditProfileController {
     	model.addAttribute("user", user);
     	User edituser=userService.findByUsername(principal.getName());
     	System.out.println(edituser.getPassword());
-    	System.out.println(userService.checkpassword(old_pass, edituser.getPassword()));
+    	//System.out.println(userService.checkpassword(old_pass, edituser.getPassword()));
 
     	System.out.println(edituser.getPassword());
-        if ( !new_pass.equals(confirm_new_pass)  || new_pass.equals("") || old_pass.equals("") || !userService.checkpassword(old_pass, edituser.getPassword())) {
+        if ( !new_pass.equals(confirm_new_pass)  || new_pass.equals("") || old_pass.equals("")  ) {//!userService.checkpassword(old_pass, edituser.getPassword())) {
         	System.out.println("hello");
             return "passwordchange";
         } else {

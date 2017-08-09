@@ -2,6 +2,8 @@ package medusa.controllers;
 
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.mail.internet.InternetAddress;
 import javax.validation.Valid;
@@ -13,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.common.collect.Lists;
 
@@ -50,6 +53,12 @@ public class HomeController {
     @RequestMapping(value="/register", method = RequestMethod.GET)
     public String showRegistrationPage(Model model){
         model.addAttribute("user", new User());
+        Map<String, String> userlist = new HashMap<String, String>();
+        userlist.put("APP","APP");
+        userlist.put("PADMIN", "PADMIN");
+        userlist.put("SADMIN","SADMIN");
+        model.addAttribute("userlist",userlist);
+        model.addAttribute("uselect","APP");
         return "registration";
     }
     @RequestMapping(value="/register", method = RequestMethod.POST)
@@ -57,9 +66,10 @@ public class HomeController {
         model.addAttribute("user", user);
         userValidator.validate(user, result);
         if (result.hasErrors()) {
+        	//System.out.println(uselect);
             return "registration";
         } else {
-        	user.setRole("APP");
+        	
         	System.out.println(user.getRole());
             userService.saveUser(user);
             model.addAttribute("message", "User Account Successfully Created");

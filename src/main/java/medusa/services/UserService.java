@@ -12,8 +12,8 @@ import medusa.services.SSUserDetailsService;
 public class UserService {
 	@Autowired
     UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    //@Autowired
+   // private PasswordEncoder passwordEncoder;
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -28,7 +28,7 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
     public void saveUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        //user.setPassword(passwordEncoder.encode(user.getPassword()));
     	//System.out.println(user.getPassword());
     	//StandardPBEStringEncryptor spbe= new StandardPBEStringEncryptor();
         //spbe.setPassword(user.getPassword());
@@ -37,17 +37,17 @@ public class UserService {
         userRepository.save(user);
     }
     public void saveAdmin(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        //user.setPassword(passwordEncoder.encode(user.getPassword()));
     	//StandardPBEStringEncryptor spbe= new StandardPBEStringEncryptor();
        // spbe.setPassword(user.getPassword());
         user.setActive("true");
         userRepository.save(user);
     }
     
-    public boolean checkpassword(String raw_pass,String encrypted_pass)
+    /*public boolean checkpassword(String raw_pass,String encrypted_pass)
     {
     	return passwordEncoder.matches(raw_pass,encrypted_pass);
-    }
+    }*/
     public SSUserDetailsService createservice()  
     {
     	return new SSUserDetailsService(userRepository);
