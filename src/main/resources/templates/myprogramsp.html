@@ -1,5 +1,6 @@
-<!DOCTYPE html> 
-<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/extras/spring-security">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"
+	xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <title>Program Admin: My Program</title>
@@ -8,93 +9,88 @@
 <body>
 	<h1>My Programs</h1>
 
-<!-- 	<th:block th:each="index : ${#numbers.sequence(0, #arrays.length(programs) - 1)}"> -->
-<!-- 		<div class="program-container" th:with="program=${programs[index]}"> -->
-<!-- 			<div class="row"> -->
-<!-- 				<div class="course-name"> -->
-<!-- 					<p th:text="${'Course: ' + program.name}"></p> -->
-<!-- 					<p th:text="${'ID: ' + program.id}"></p> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
+	<div class="container" th:if="${#lists.isEmpty(programs)}">No
+		Applications.</div>
+	<div class="container" th:if="${not #lists.isEmpty(programs)}">
 
-<!-- 			<div class="row"> -->
-<!-- 				<div class="course-schedule"> -->
-<!-- 					<p th:text="${program.schedule}"></p> -->
-<!-- 				</div> -->
-<!-- 			</div> -->			
-<!-- 		</div> -->
-<!-- 	</th:block> -->
+		<th:block
+			th:each="index : ${#numbers.sequence( 0, #arrays.length(programs)-1)}">
+			<div class="program-container" th:with="program=${programs[index]}">
+				<div class="row">
+					<div class="course-name">
+						<p th:text="${'Course: ' + program.name}"></p>
+						<p th:text="${'ID: ' + program.id}"></p>
+					</div>
 
-	<th:block th:each="index : ${#numbers.sequence( 0, #arrays.length(programs)-1)}">
-		<div class="program-container" th:with="program=${programs[index]}">
-			<div class="row">
-				<div class="course-name">
-					<p th:text="${'Course: ' + program.name}"></p>
-					<p th:text="${'ID: ' + program.id}"></p>
+					<div class="course-apply">
+						<form action="#" th:action="@{viewquestions}"
+							th:object="${program}" method="post">
+							<input type="hidden" name="id" th:value="${program.id}" /> <input
+								type="hidden" name="name" th:value="${program.name}" /> <input
+								type="hidden" name="description"
+								th:value="${program.description}" /> <input type="hidden"
+								name="startDate" th:value="${program.startDate}" /> <input
+								type="hidden" name="endDate" th:value="${program.endDate}" /> <input
+								type="hidden" name="classSize" th:value="${program.classSize}" />
+							<input type="hidden" name="active" th:value="${program.active}" />
+							<input type="hidden" name="open" th:value="${program.open}" /> <input
+								type="hidden" name="deadline" th:value="${program.deadline}" />
+							<input type="hidden" name="schedule"
+								th:value="${program.schedule}" /> <input type="hidden"
+								name="college" th:value="${program.college.id}" />
+							<button class="btn btn-block" type="submit">View
+								Questions</button>
+						</form>
+						<form action="#" th:action="@{editprogram}" th:object="${program}"
+							method="post">
+							<input type="hidden" name="id" th:value="${program.id}" />
+							<button class="btn btn-block" type="submit">Edit Program</button>
+						</form>
+					</div>
 				</div>
-				
-				<div class="course-apply">
-					<form action="#" th:action="@{viewquestions}" th:object="${program}" method="post">
-						<input type="hidden" name="id" th:value="${program.id}" />
-						<input type="hidden" name="name" th:value="${program.name}" />
-						<input type="hidden" name="description" th:value="${program.description}" />
-						<input type="hidden" name="startDate" th:value="${program.startDate}" />
-						<input type="hidden" name="endDate" th:value="${program.endDate}" />
-						<input type="hidden" name="classSize" th:value="${program.classSize}" />
-						<input type="hidden" name="active" th:value="${program.active}" />
-						<input type="hidden" name="open" th:value="${program.open}" />
-						<input type="hidden" name="deadline" th:value="${program.deadline}" />
-						<input type="hidden" name="schedule" th:value="${program.schedule}" />
-						<input type="hidden" name="college" th:value="${program.college.id}" />
-						<button class="btn btn-block" type="submit">View Questions</button>
-					</form>
-					<form action="#" th:action="@{editprogram}" th:object="${program}" method="post">
-						<input type="hidden" name="id" th:value="${program.id}" />
-						<button class="btn btn-block" type="submit">Edit Program</button>
-					</form>
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="course-schedule">
-					<p th:text="${program.schedule}"></p>
-				</div>
-				<div class="course-admins">
-					<p>Program Admin(s)</p>
-					<th:block th:each="progAdmin : ${program.users}">
-						<p th:text="${progAdmin.firstName + ' ' + progAdmin.lastName}"></p>
-					</th:block>
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="addsession">
-					<form action="#" th:action="@{addsession}" th:object="${program}" method="post">
-						<input type="hidden" name="id" th:value="${program.id}" />
-						<button class="btn btn-block" type="submit">Add Session</button>
-					</form>
-				</div>
-			</div>
-			
-			<div class="course-description">
-				<p th:text="${program.description}"></p>
-			</div>
-			<div class="row">
-				<div class="course-college-deadline">
-					<p th:text="${program.college.name}"></p>
-					<p th:text="${'Deadline: ' + program.deadline}"></p>
-				</div>
-				<div class="course-enrollment-range">
-					<p th:text="${'Students Enrolled: ' + counts[index] + '/' + program.classSize}"></p>
-					<p th:text="${program.startDate + ' - ' + program.endDate}"></p>
-				</div>
-			</div>
-		</div>
-	</th:block>
-	
-	<a href="/applicantdashboard">Click to Return to Dash</a>
 
-	
+				<div class="row">
+					<div class="course-schedule">
+						<p th:text="${program.schedule}"></p>
+					</div>
+					<div class="course-admins">
+						<p>Program Admin(s)</p>
+						<th:block th:each="progAdmin : ${program.users}">
+							<p th:text="${progAdmin.firstName + ' ' + progAdmin.lastName}"></p>
+						</th:block>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="addsession">
+						<form action="#" th:action="@{addsession}" th:object="${program}"
+							method="post">
+							<input type="hidden" name="id" th:value="${program.id}" />
+							<button class="btn btn-block" type="submit">Add Session</button>
+						</form>
+					</div>
+				</div>
+
+				<div class="course-description">
+					<p th:text="${program.description}"></p>
+				</div>
+				<div class="row">
+					<div class="course-college-deadline">
+						<p th:text="${program.college.name}"></p>
+						<p th:text="${'Deadline: ' + program.deadline}"></p>
+					</div>
+					<div class="course-enrollment-range">
+						<p
+							th:text="${'Students Enrolled: ' + counts[index] + '/' + program.classSize}"></p>
+						<p th:text="${program.startDate + ' - ' + program.endDate}"></p>
+					</div>
+				</div>
+			</div>
+		</th:block>
+	</div>
+	<a href="/dashboard">Click to Return to Dash</a>
+
+
 
 </body>
 </html>
