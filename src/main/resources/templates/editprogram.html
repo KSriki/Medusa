@@ -20,13 +20,13 @@
 	<p th:text="${'Deadline: ' + program.deadline}"></p>
 	
 	
-	<form action="#" th:action="@{updateprogram}" th:object="${prog}" method="post">
+	<form action="#" th:action="@{updateprogram}" th:object="${program}" method="post">
 	
-		New Start Date: <input th:value="${prog.startDate}" type="text"> <br>
-		New End Date: <input th:value="${prog.endDate}" type="text"> <br>
-		New Schedule: <input th:value="${prog.schedule}" type="text"> <br>
-		New Deadline: <input th:value="${prog.deadline}" type="text"> <br>
-		<input type="hidden" th:value="${program.id}"
+		New Start Date: <input name="startDate" type="text"> <br>
+		New End Date: <input name="endDate" type="text"> <br>
+		New Schedule: <input name="schedule" type="text"> <br>
+		New Deadline: <input name="deadline" type="text"> <br>
+		<input type="hidden" name="id" th:value="${program.id}">
 	
 		<input type="submit" value="Update Program">
 		

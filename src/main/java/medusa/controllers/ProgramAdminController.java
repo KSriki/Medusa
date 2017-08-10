@@ -68,18 +68,29 @@ public class ProgramAdminController {
 		return "editprogram";
 		
 	}
-	
+//	
 	@RequestMapping(value="/updateprogram", method=RequestMethod.POST)
-	public String editProg(@Valid @ModelAttribute("prog") Program prog, Model model) {
+	public String updateProg(@Valid @ModelAttribute("program") Program prog, Model model, Principal principal) {
 		
 		Program program = programService.findById(prog.getId());
 		
+		program.setStartDate(prog.getStartDate());
+		program.setEndDate(prog.getEndDate());
+		program.setSchedule(prog.getSchedule());
+		program.setDeadline(prog.getDeadline());
+		programService.saveProgram(program);
+//		
+//		Program program = programService.findById(prog.getId());
+//		
+//		
+//		Long count = applicationService.countByProgramAndStatus(prog, "enrolled");
+//		model.addAttribute("program", prog);
+//		model.addAttribute("count",count);
 		
-		Program prog = programService.findById(program.getId());
-		Long count = applicationService.countByProgramAndStatus(prog, "enrolled");
-		model.addAttribute("program", prog);
-		model.addAttribute("count",count);
-		return "editprogram";
+		User user = userService.findByUsername(principal.getName());
+		model.addAttribute("user", user);
+		
+		return "dashboard";
 		
 	}
 //	
