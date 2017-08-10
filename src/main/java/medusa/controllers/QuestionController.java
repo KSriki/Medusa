@@ -68,7 +68,19 @@ public class QuestionController {
     public String viewResponses(Model model, @Valid @ModelAttribute("question") Question question) {
     	Question q = questionService.findByContent(question.getContent());
     	List<Response> responses = q.getResponses();
-    	model.addAttribute("question", question)
+    	model.addAttribute("question", q);
+    	model.addAttribute("responses", responses);
+    	return "viewresponses";
+    }
+    
+    @RequestMapping(value="removequestion", method=RequestMethod.POST)
+    public String deleteQuestion(Model model, @Valid @ModelAttribute("question") Question question, @Valid @ModelAttribute("program") Program program) {
+    	Question q = questionService.findByContent(question.getContent());
+    	q.setActive("false");
+    	questionService.saveQuestion(q);
+    	model.addAttribute("program",program);
+    	model.addAttribute("questions", program.getQuestions());
+    	return "redirect:/viewquestions";
     }
 	
 }
