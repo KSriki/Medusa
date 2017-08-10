@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import medusa.models.Program;
 import medusa.models.Question;
+import medusa.models.Response;
 import medusa.services.ProgramService;
 import medusa.services.QuestionService;
 import medusa.services.UserService;
@@ -48,12 +49,26 @@ public class QuestionController {
     
     @RequestMapping(value="/viewquestions", method = RequestMethod.POST)
     public String viewQuestions(@Valid @ModelAttribute("program") Program program, Model model) {
-    	System.out.println(program);
-    	System.out.println(programService.findByName(program.getName()).getQuestions());
     	List<Question> questions = programService.findByName(program.getName()).getQuestions();
     	model.addAttribute("questions", questions);
     	model.addAttribute("program", program);
     	return "viewquestions";
+    }
+    
+    @RequestMapping(value="/viewuniversalquestions", method = RequestMethod.GET)
+    public String viewUniversalQuestions(Model model) {
+    	Program program = programService.findByName("universal");
+    	List<Question> questions = program.getQuestions();
+    	model.addAttribute("questions", questions);
+    	model.addAttribute("program", program);
+    	return "viewquestions";
+    }
+    
+    @RequestMapping(value="/viewresponses", method = RequestMethod.POST)
+    public String viewResponses(Model model, @Valid @ModelAttribute("question") Question question) {
+    	Question q = questionService.findByContent(question.getContent());
+    	List<Response> responses = q.getResponses();
+    	model.addAttribute("question", question)
     }
 	
 }

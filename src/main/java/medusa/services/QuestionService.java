@@ -18,4 +18,8 @@ public class QuestionService {
     public void saveQuestion(Question question) {
     	questionRepository.save(question);
     }
+    
+    public Question findByContent(String content) {
+    	return questionRepository.findByContent(content);
+    }
 }
