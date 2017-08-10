@@ -49,6 +49,10 @@ public class HomeController {
 	   public String index(Model model){
 	        return "homepage";
 	  }
+	@RequestMapping("/userPage")
+	   public String userPage(Model model){
+	        return "userPage";
+	  }
     
     @RequestMapping(value="/register", method = RequestMethod.GET)
     public String showRegistrationPage(Model model){
