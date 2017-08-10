@@ -20,20 +20,11 @@ p{font-size: 100%;}
 </head>
 <body style="align: center">
 <!-- Navbar (sit on top) -->
-<div class="w3-top">
-  <div class="w3-bar w3-white w3-padding w3-card-2" style="letter-spacing:4px;">
-    <a href="/" class="w3-bar-item w3-button">Medusa Education</a>
- 
-    <div class="w3-right w3-hide-small">
-<!--     <a href="login.jsp" class="w3-bar-item w3-button">Log in</a> -->
-	  <a href="/logout" class="w3-bar-item w3-button" style="size:5">log Out</a> 
-<!--       <a href="contactSection.html" class="w3-bar-item w3-button">Contact</a> -->
-    </div>
-  </div>
-</div>
-<br />
-<br />
-<br /><br /><br />
+	<th:block th:replace="navigation :: nav"></th:block>
+	<br />
+		<br />
+		<br /><br />
+		<br />
 
 
 <div class="container"  th:if="${not #lists.isEmpty(userlist)}">
