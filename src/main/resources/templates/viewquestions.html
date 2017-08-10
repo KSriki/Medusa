@@ -64,7 +64,7 @@ p {
 					</form>
 				</td>
 				<td>
-					<form th:action="@{/editquestion}" th:object="${question}" method="post">
+					<form th:action="@{/editquestion}" th:object="${question}" method="get">
 						<input type="hidden" name="id" th:value="${question.id}" />
 						<input type="hidden" name="content" th:value="${question.content}" />
 						<input type="hidden" name="active" th:value="${question.active}" />

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Edit Question</title>
+</head>
+<body>
+<body>
+	<form action="#" th:action="@{/editquestion}" th:object="${question}" method="post">
+		Question Type: <br>
+		<input type="radio" th:field="*{type}" value="MC"/> Multiple Choice <br>
+		<input type="radio" th:field="*{type}" value="MS"/> Multiple Select <br>
+		<input type="radio" th:field="*{type}" value="PA"/> Paragraph <br>
+		<input type="radio" th:field="*{type}" value="SA"/> Short Answer <br>
+		
+		Question Content: <input type="text" th:field="*{content}"> <br>
+		Question Choices: <input type="text" th:field="*{choices}">  <br>
+		<input type="hidden" name="program" th:value="${program.id}"> <br>
+		<input type="hidden" name="id" th:value="${question.id}">
+		<input type="submit" value="Submit"/>
+	</form>
+	
+</body>
+</body>
+</html>

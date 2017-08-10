@@ -44,7 +44,7 @@ p {
 		</tr>
 		<th:block th:each="response : ${responses}">
 			<tr th:if="${#strings.equals(response.active,'true')}">
-				<td th:text="${response.applicant.user.name}"></td>
+				<td th:text="${response.application.user.firstName + ' ' + response.application.user.lastName}"></td>
 				<td th:text="${response.content}"></td>
 			</tr>
 		</th:block>
