@@ -1,5 +1,7 @@
 package medusa.repositories;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
 import medusa.models.User;
@@ -9,4 +11,5 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	public User findByEmail(String email);
 	public Long countByEmail(String email);
 	public Long countByUsername(String username);
+	public List<User> findAllByRole(String role);
 }

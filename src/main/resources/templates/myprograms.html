@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="www.thymeleaf.org "
 	xmlns:sec="www.thymeleaf.org/extras/spring-security">
-	
+
 <head>
 <meta charset="UTF-8">
 <title>My Programs</title>
@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/css/browseprograms.css"></link>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-  <style>
+<style>
 a {
 	font-size: 250%;
 	text-decoration: underline;
@@ -36,14 +36,20 @@ p {
 
 </head>
 <body>
-<th:block th:replace="navigation :: nav"></th:block>
-<br /> <br /> <br /><br />
+	<th:block th:replace="navigation :: nav"></th:block>
+	<br />
+	<br />
+	<br />
+	<br />
 	<div class="container" th:if="${#lists.isEmpty(apps)}">No
 		Applications.</div>
 	<div class="container" th:if="${not #lists.isEmpty(apps)}">
 
 
 		<h2>Applications</h2>
+		
+		Need to filter on open programs
+		
 		<th:block
 			th:each="index : ${#numbers.sequence( 0, #arrays.length(apps)-1)}">
 			<div class="program-container" th:with="app=${apps[index]}"
@@ -55,56 +61,59 @@ p {
 					</div>
 					<div style="text-align: right">
 
-						<div class="course-apply" th:if="${not #strings.equals(app.status,'enrolled')}">
+						<div class="course-apply"
+							th:if="${ #strings.equals(app.status,'accepted')}">
 							<form action="#" th:action="@{enroll}" th:object="${app}"
 								method="post">
 								<input type="hidden" name="id" th:value="${app.id}" />
 								<button th:text="${app.status}" class="btn btn-block"
 									type="submit"></button>
 							</form>
-								<p th:text="'Date Applied: ' + ${app.dateApplied}"></p>
-						</div>
-						
-						<div class="course-apply" th:if="${#strings.equals(app.status,'enrolled')}">
-							Enrolled
+							<p th:text="'Date Applied: ' + ${app.dateApplied}"></p>
 						</div>
 
+						<div class="course-apply"
+							th:if="${#strings.equals(app.status,'enrolled')}">Enrolled
+						</div>
+						<div class="course-apply">
+							<p th:text="'Date Applied: ' + ${app.dateApplied}"></p>
+						</div>
+
 
 					</div>
+					<div class="row">
 
+						<div class="course-schedule">
+							<p th:text="${app.program.schedule}"></p>
+						</div>
+						<div class="course-admins">
+							<p>Program Admin(s)</p>
+							<th:block th:each="progAdmin : ${app.program.users}">
+								<p th:text="${progAdmin.firstName + ' ' + progAdmin.lastName}"></p>
+							</th:block>
+						</div>
+					</div>
+
+					<div class="course-description">
+						<p th:text="${app.program.description}"></p>
+					</div>
+					<div class="row">
+						<div class="course-college-deadline">
+							<p th:text="${app.program.college.name}"></p>
+							<p th:text="${'Deadline: ' + app.program.deadline}"></p>
+						</div>
+						<div class="course-enrollment-range">
+							<p
+								th:text="${'Students Enrolled: ' + counts[index] + '/' + app.program.classSize}"></p>
+							<p
+								th:text="${app.program.startDate + ' - ' + app.program.endDate}"></p>
+
+
+						</div>
+						<div></div>
+					</div>
+					</div>
 				</div>
-				<div class="row">
-
-					<div class="course-schedule">
-						<p th:text="${app.program.schedule}"></p>
-					</div>
-					<div class="course-admins">
-						<p>Program Admin(s)</p>
-						<th:block th:each="progAdmin : ${app.program.users}">
-							<p th:text="${progAdmin.firstName + ' ' + progAdmin.lastName}"></p>
-						</th:block>
-					</div>
-				</div>
-
-				<div class="course-description">
-					<p th:text="${app.program.description}"></p>
-				</div>
-				<div class="row">
-					<div class="course-college-deadline">
-						<p th:text="${app.program.college.name}"></p>
-						<p th:text="${'Deadline: ' + app.program.deadline}"></p>
-					</div>
-					<div class="course-enrollment-range">
-						<p
-							th:text="${'Students Enrolled: ' + counts[index] + '/' + app.program.classSize}"></p>
-						<p
-							th:text="${app.program.startDate + ' - ' + app.program.endDate}"></p>
-
-
-					</div>
-					<div></div>
-				</div>
-			</div>
 		</th:block>
 
 	</div>

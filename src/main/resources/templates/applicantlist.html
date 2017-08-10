@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org "
+	xmlns:sec="www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Applicant List</title>
+<link rel="stylesheet" href="/css/browseprograms.css"></link>
+</head>
+<body>
+
+	<div class="container" th:if="${#lists.isEmpty(userlist)}">No
+		Users.</div>
+	<div class="container" th:if="${not #lists.isEmpty(userlist)}">
+
+
+		<h2>Users</h2>
+		<th:block
+			th:each="user : ${userlist}">
+			
+			<!-- ban/block applicant -->
+		<p th:text="${user.username}" ></p>
+				
+			
+		</th:block>
+
+	</div>
+</body>
+</html>
