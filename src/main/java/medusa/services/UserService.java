@@ -33,14 +33,14 @@ public class UserService {
     	//StandardPBEStringEncryptor spbe= new StandardPBEStringEncryptor();
         //spbe.setPassword(user.getPassword());
         //user.setPassword(spbe.encrypt(user.getPassword()));
-        user.setActive("true");
+        //user.setActive("true");
         userRepository.save(user);
     }
     public void saveAdmin(User user) {
         //user.setPassword(passwordEncoder.encode(user.getPassword()));
     	//StandardPBEStringEncryptor spbe= new StandardPBEStringEncryptor();
        // spbe.setPassword(user.getPassword());
-        user.setActive("true");
+        //user.setActive("true");
         userRepository.save(user);
     }
     

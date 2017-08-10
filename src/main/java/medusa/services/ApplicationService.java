@@ -1,5 +1,7 @@
 package medusa.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +31,17 @@ public class ApplicationService {
     	return applicationRepository.findByProgramAndUser(program, user);
     }
     
+    public List<Application> findByProgram(Program program){
+    	return applicationRepository.findByProgram(program);
+    }
+    
     public Application findById(Long id) {
     	return applicationRepository.findById(id);
     }
-
+    
+    /*public User findById(Long id) {
+    	return applicationRepository.findById(id);
+    }*/
+    
+   
 }
