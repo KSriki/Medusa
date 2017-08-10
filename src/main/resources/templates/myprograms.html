@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="www.thymeleaf.org "
 	xmlns:sec="www.thymeleaf.org/extras/spring-security">
-	
+
 <head>
 <meta charset="UTF-8">
 <title>My Programs</title>
@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/css/browseprograms.css"></link>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-  <style>
+<style>
 a {
 	font-size: 250%;
 	text-decoration: underline;
@@ -36,8 +36,11 @@ p {
 
 </head>
 <body>
-<th:block th:replace="navigation :: nav"></th:block>
-<br /> <br /> <br /><br />
+	<th:block th:replace="navigation :: nav"></th:block>
+	<br />
+	<br />
+	<br />
+	<br />
 	<div class="container" th:if="${#lists.isEmpty(apps)}">No
 		Applications.</div>
 	<div class="container" th:if="${not #lists.isEmpty(apps)}">
@@ -54,21 +57,24 @@ p {
 						<p th:text="${'ID: ' + app.program.id}"></p>
 					</div>
 					<div style="text-align: right">
-
-						<div class="course-apply" th:if="${not #strings.equals(app.status,'enrolled')}">
+						<div class="course-apply"
+							th:if="${not #strings.equals(app.status,'enrolled')}" th:text="{app.status}"></div>
+							
+						<div class="course-apply"
+							th:if="${#strings.equals(app.status,'enrolled')}">Enrolled
+						</div>
+							
+						<div class="course-apply"
+							th:if="${#strings.equals(app.status,'applied')}">
 							<form action="#" th:action="@{enroll}" th:object="${app}"
 								method="post">
 								<input type="hidden" name="id" th:value="${app.id}" />
 								<button th:text="${app.status}" class="btn btn-block"
 									type="submit"></button>
 							</form>
-								<p th:text="'Date Applied: ' + ${app.dateApplied}"></p>
 						</div>
-						
-						<div class="course-apply" th:if="${#strings.equals(app.status,'enrolled')}">
-							Enrolled
-						</div>
-
+		<p th:text="'Date Applied: ' + ${app.dateApplied}"></p>
+					
 
 					</div>
 
