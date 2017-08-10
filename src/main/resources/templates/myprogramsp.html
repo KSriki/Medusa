@@ -5,8 +5,36 @@
 <meta charset="UTF-8">
 <title>Program Admin: My Program</title>
 <link rel="stylesheet" href="/css/browseprograms.css"></link>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+  <style>
+a {
+	font-size: 250%;
+	text-decoration: underline;
+}
+
+img {
+	display: block !important;
+	visibility: visible
+}
+
+body {
+	font-family: "Times New Roman", Georgia, Serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Playfair Display";
+	letter-spacing: 5px;
+}
+
+p {
+	font-size: 100%;
+}
+</style>
 </head>
 <body>
+<th:block th:replace="navigation :: nav"></th:block>
+<br /> <br /> <br /><br />
 	<h1>My Programs</h1>
 
 	<div class="container" th:if="${#lists.isEmpty(programs)}">No

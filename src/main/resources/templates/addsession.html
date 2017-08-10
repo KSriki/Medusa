@@ -3,8 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <title>Add Session</title>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+  <style>
+a {
+	font-size: 250%;
+	text-decoration: underline;
+}
+
+img {
+	display: block !important;
+	visibility: visible
+}
+
+body {
+	font-family: "Times New Roman", Georgia, Serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Playfair Display";
+	letter-spacing: 5px;
+}
+
+p {
+	font-size: 100%;
+}
+</style>
 </head>
 <body>
+<th:block th:replace="navigation :: nav"></th:block>
+<br /> <br /> <br /><br />
 	<h1>Add New Session</h1>
 	<p th:text="${'Program: ' + program.name}">Program Name</p>
 	<p th:text="${'Program Id: ' + program.id}">Program ID</p>

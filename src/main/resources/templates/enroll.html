@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="www.thymeleaf.org " xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <title>Success!</title>
+ <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<style>
+a {font-size: 250%;
+	text-decoration: underline;}
+img {display:block !important; visibility:visible}
+body {font-family: "Times New Roman", Georgia, Serif;} 
+h1,h2,h3,h4,h5,h6 { 
+  font-family: "Playfair Display"; 
+  letter-spacing: 5px; 
+ } 
+p{font-size: 100%;}
+</style> 
 </head>
 <body>
+<th:block th:replace="navigation :: nav"></th:block>
+<br />
+<br />
+<br /><br /><br />
 <div class="container">
 	<h4>Thank you for enrolling!</h4>
 	<a href="/myprograms">Return to My Programs Page</a>

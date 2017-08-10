@@ -6,10 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Applicant Profile</title>
-    <!-- <th:block th:replace="base :: head"></th:block> -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="../../css/homepage.css">
+<style>
+a {font-size: 250%;
+	text-decoration: underline;}
+img {display:block !important; visibility:visible}
+body {font-family: "Times New Roman", Georgia, Serif;} 
+h1,h2,h3,h4,h5,h6 { 
+  font-family: "Playfair Display"; 
+  letter-spacing: 5px; 
+ } 
+p{font-size: 100%;}
+</style> 
 </head>
 <body>
-
+<th:block th:replace="navigation :: nav"></th:block>
+<br />
+<br />
+<br /><br /><br />
 Hello Applicant this is your profile
 
  	<div th:if="${param.error}">
