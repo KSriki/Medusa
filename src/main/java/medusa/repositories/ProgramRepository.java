@@ -14,5 +14,5 @@ public interface ProgramRepository extends CrudRepository<Program, Long> {
 	//@Query("select p from Program p where ?1 in p.users and active=?2")
 	//might have proble,, getting right programs
 	public Program findById(long id);
-
+	public Program findFirstByName(String name);
 }
