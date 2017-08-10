@@ -12,7 +12,7 @@
 		<h4 th:text="${question.content}"></h4>
 		<div class="response-form" th:if="${#strings.equals(question.type,'PA')}">
 			<form action="#" th:action="@{/next}" th:object="${response}" method="post">
-				<textarea id="content" th:field="*{content}"></textarea>
+				<textarea id="content" th:field="*{content}" rows="10" cols="60"></textarea>
 				<input type="hidden" name="question" th:value="${question.id}" />
 				<input type="hidden" name="application" th:value="${app.id}" />
 				<button class="btn btn-block" type="submit">Next</button>

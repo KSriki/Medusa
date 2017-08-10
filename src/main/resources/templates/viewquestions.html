@@ -17,6 +17,7 @@
 			<th>Choices</th>
 			<th></th>
 			<th></th>
+			<th></th>
 		</tr>
 		<th:block th:each="question : ${questions}">
 			<tr th:if="${#strings.equals(question.active,'true')}">
@@ -32,6 +33,16 @@
 						<input type="hidden" name="type" th:value="${question.type}" />
 						<input type="hidden" name="choices" th:value="${question.choices}" />
 						<button class="btn btn-block" type="submit">View Responses</button>
+					</form>
+				</td>
+				<td>
+					<form th:action="@{/editquestion}" th:object="${question}" method="post">
+						<input type="hidden" name="id" th:value="${question.id}" />
+						<input type="hidden" name="content" th:value="${question.content}" />
+						<input type="hidden" name="active" th:value="${question.active}" />
+						<input type="hidden" name="type" th:value="${question.type}" />
+						<input type="hidden" name="choices" th:value="${question.choices}" />
+						<button class="btn btn-block" type="submit">Edit Question</button>
 					</form>
 				</td>
 				<td>

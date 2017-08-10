@@ -52,7 +52,7 @@ public class ApplicantDashboardController {
 	}
 	
 	//method is post for when we get specific user from form after logging in
-	@RequestMapping(value="/applicantdashboard")  //,method=RequestMethod.POST)
+	@RequestMapping(value="/dashboard")  //,method=RequestMethod.POST)
 	public String showDashboard(Principal principal, Model model) {
 		//display user's name on dashboard page apart from
 		//model.addAttribute("user", new User());

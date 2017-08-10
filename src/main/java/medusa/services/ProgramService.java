@@ -48,6 +48,10 @@ public class ProgramService {
     	return programRepository.findByName(name);
     }
     
+    public Program findFirstByName(String name) {
+    	return programRepository.findFirstByName(name);
+    }
+    
     public Program findById(long id) {
     	return programRepository.findById(id);
     }

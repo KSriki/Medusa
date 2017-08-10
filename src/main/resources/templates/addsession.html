@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Add Session</title>
+</head>
+<body>
+	<h1>Add New Session</h1>
+	<p th:text="${'Program: ' + program.name}">Program Name</p>
+	<p th:text="${'Program Id: ' + program.id}">Program ID</p>
+	<p th:text="${'College: ' + program.college.name}"></p>
+	<p>Program Admin(s)</p>
+	<th:block th:each="progAdmin : ${program.users}">
+		<p th:text="${progAdmin.firstName + ' ' + progAdmin.lastName}">List of admins</p>
+	</th:block>
+	<p th:text="${'Description: ' + program.description}">Program Description</p>
+	<p th:text="${'Students Enrolled: ' + count + '/' + program.classSize}"></p>
+	<p th:text="${program.schedule}"></p>
+	<p th:text="${program.startDate + ' to ' + program.endDate }"></p>
+	<p th:text="${'Deadline: ' + program.deadline}"></p>
+	
+	
+	<form action="#" th:action="@{addedsession}" th:object="${newProgram}" method="post">
+	
+		Session Start Date: <input name="startDate" type="text"> <br>
+		Session End Date: <input name="endDate" type="text"> <br>
+		Session Schedule: <input name="schedule" type="text"> <br>
+		Session Deadline: <input name="deadline" type="text"> <br>
+		<input type="hidden" name="name" th:value="${program.name}">
+	
+		<input type="submit" value="Add Session">
+		
+	</form>
+
+</body>
+</html>

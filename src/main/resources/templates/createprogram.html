@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org "
+	xmlns:sec="www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Create New Program</title>
+</head>
+<body>
+	<form th:action="@{addprogram}" th:object="${program}" method="post">
+		Name: <input type="text" id="name" th:field="*{name}" />
+		Description: <textarea id="description" th:field="*{description}" rows="10" cols="60"></textarea>
+		Start Date: <input type="text" id="startDate" th:field="*{startDate}" />
+		End Date: <input type="text" id="endDate" th:field="*{endDate}" />
+		Application Deadline: <input type="text" id="deadline" th:field="*{deadline}" />
+		Class Size: <input type="number" id="classSize" th:field="*{classSize}" />
+		<input type="hidden" name="college" th:value="${college}" />
+		Program Admin: <select id="pAdmin" name="pAdmin">
+			<option th:each="padmin : ${padmins}" th:value="${padmin.email}" th:text="${padmin.firstName + ' ' + padmin.lastName}"></option>
+		</select>
+		<input type="submit" value="Submit"/>
+	</form>
+</body>
+</html>

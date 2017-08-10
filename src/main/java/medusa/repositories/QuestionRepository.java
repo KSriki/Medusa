@@ -6,4 +6,5 @@ import medusa.models.Question;
 
 public interface QuestionRepository extends CrudRepository<Question, Long> {
 
+	public Question findByContent(String content);
 }
