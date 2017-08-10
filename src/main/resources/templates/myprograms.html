@@ -58,7 +58,7 @@ p {
 					</div>
 					<div style="text-align: right">
 						<div class="course-apply"
-							th:if="${not #strings.equals(app.status,'enrolled')}" th:text="{app.status}"></div>
+							th:if="${not #strings.equals(app.status,'enrolled')}" th:text="${app.status}"></div>
 							
 						<div class="course-apply"
 							th:if="${#strings.equals(app.status,'enrolled')}">Enrolled
