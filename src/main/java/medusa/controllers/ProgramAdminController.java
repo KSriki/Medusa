@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+import medusa.models.Application;
 import medusa.models.College;
 import medusa.models.Program;
 import medusa.models.Question;
@@ -201,6 +201,29 @@ public class ProgramAdminController {
 		return "dashboard";
 		
 	}	
+	
+	@RequestMapping(value="/viewallapplicants", method=RequestMethod.GET)
+	public String viewAllApps(Principal principal, Model model) {
+		
+		User user = userService.findByUsername(principal.getName());
+		
+		List<User> list_users = new ArrayList<User>();
+		
+		List<Program> program_list = user.getPrograms();
+		
+		for (Program p : program_list) {
+			System.out.println(p.getName());
+			List<Application> app_list = p.getApplications();
+			for (Application a : app_list) {
+				System.out.println(a.getUser());
+				list_users.add(a.getUser());
+			}
+		}
+		
+		model.addAttribute("users",list_users);
+		
+		return "viewallapplicants_pa";
+	}
 	
 //	
 //	@RequestMapping(value="/editprogram", method=RequestMethod.POST)
