@@ -46,6 +46,10 @@ public class UserService {
         userRepository.save(user);
     }
     
+    public List<User> findByRoleAndActive(String role, String active) {
+    	return userRepository.findByRoleAndActive(role, active);
+    }
+    
     /*public boolean checkpassword(String raw_pass,String encrypted_pass)
     {
     	return passwordEncoder.matches(raw_pass,encrypted_pass);

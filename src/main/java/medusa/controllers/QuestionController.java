@@ -73,7 +73,7 @@ public class QuestionController {
     	return "viewresponses";
     }
     
-    @RequestMapping(value="removequestion", method=RequestMethod.POST)
+    @RequestMapping(value="removequestion", method = RequestMethod.POST)
     public String deleteQuestion(Model model, @Valid @ModelAttribute("question") Question question, @Valid @ModelAttribute("program") Program program) {
     	Question q = questionService.findByContent(question.getContent());
     	q.setActive("false");
@@ -81,6 +81,13 @@ public class QuestionController {
     	model.addAttribute("program",program);
     	model.addAttribute("questions", program.getQuestions());
     	return "redirect:/viewquestions";
+    }
+    
+    @RequestMapping(value="editquestion", method = RequestMethod.POST)
+    public String editQuestion(Model model, @Valid @ModelAttribute("question") Question question, @Valid @ModelAttribute("program") Program program) {
+    	model.addAttribute("program",program);
+    	model.addAttribute("question", question);
+    	return "editquestion";
     }
 	
 }
