@@ -1,5 +1,7 @@
 package medusa.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -42,6 +44,10 @@ public class UserService {
        // spbe.setPassword(user.getPassword());
         user.setActive("true");
         userRepository.save(user);
+    }
+    
+    public List<User> findByRoleAndActive(String role, String active) {
+    	return userRepository.findByRoleAndActive(role, active);
     }
     
     /*public boolean checkpassword(String raw_pass,String encrypted_pass)
