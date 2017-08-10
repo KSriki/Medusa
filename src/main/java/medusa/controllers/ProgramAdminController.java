@@ -118,8 +118,54 @@ public class ProgramAdminController {
 		
 		System.out.println(oldProg.getCollege());
 		newProgram.setCollege(oldProg.getCollege());
+		newProgram.setClassSize(oldProg.getClassSize());
+		newProgram.setDescription(oldProg.getDescription());
+		
+		
+		List<Question> quest = oldProg.getQuestions();
+		Iterator<Question> iter = quest.iterator();
+		
+		List<User> users = oldProg.getUsers();
+		Iterator<User> iter2 = users.iterator();
+		
+		while(iter.hasNext()) {
+			Question q = iter.next();
+			newProgram.addQuestion(q);
+		}
+		
+		while (iter2.hasNext()) {
+			newProgram.addUser(iter2.next());
+		}
+		
 		programService.saveProgram(newProgram);
 		
+		iter = quest.iterator();
+		while (iter.hasNext()) {
+			Question q = iter.next();
+			q.addProgram(newProgram);
+			questionService.saveQuestion(q);
+		}
+		
+		iter2 = users.iterator();
+		
+		while (iter2.hasNext()) {
+			User u = iter2.next();
+			u.addProgram(newProgram);
+			userService.saveUser(u);
+		}
+		
+		College college = oldProg.getCollege();
+		college.addProgram(newProgram);
+		
+		collegeService.saveCollege(college);
+//		
+//		List<Question> quest = oldProg.getQuestions();
+//		Iterator<Question> iter = quest.iterator();
+//		while(iter.hasNext()) {
+//			Question q = iter.next();
+//			q.addProgram(newProgram);
+//			questionService.saveQuestion(q);
+//		}
 //		
 //		Program prog = programService.findById(program.getId());
 //		
