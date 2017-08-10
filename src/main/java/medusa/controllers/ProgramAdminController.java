@@ -2,6 +2,7 @@ package medusa.controllers;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -13,10 +14,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+
+import medusa.models.College;
 import medusa.models.Program;
+import medusa.models.Question;
 import medusa.models.User;
 import medusa.services.ApplicationService;
+import medusa.services.CollegeService;
 import medusa.services.ProgramService;
+import medusa.services.QuestionService;
 import medusa.services.UserService;
 
 @Controller 
@@ -28,6 +34,10 @@ public class ProgramAdminController {
 	private ProgramService programService;
 	@Autowired
 	private ApplicationService applicationService;
+	@Autowired 
+	private CollegeService collegeService;
+	@Autowired
+	private QuestionService questionService;
 
 	@RequestMapping(value="/browseprogramsp", method=RequestMethod.GET)
 	public String browsePrograms(Model model) {
@@ -66,33 +76,86 @@ public class ProgramAdminController {
 		model.addAttribute("program", prog);
 		model.addAttribute("count",count);
 		return "editprogram";
-		
 	}
-//	
+	
 	@RequestMapping(value="/updateprogram", method=RequestMethod.POST)
-	public String updateProg(@Valid @ModelAttribute("program") Program prog, Model model, Principal principal) {
+	public String updateProg(@Valid @ModelAttribute("program") Program program, Model model, Principal principal) {
 		
-		Program program = programService.findById(prog.getId());
+		Program prog = programService.findById(program.getId());
 		
-		program.setStartDate(prog.getStartDate());
-		program.setEndDate(prog.getEndDate());
-		program.setSchedule(prog.getSchedule());
-		program.setDeadline(prog.getDeadline());
-		programService.saveProgram(program);
-//		
-//		Program program = programService.findById(prog.getId());
-//		
-//		
-//		Long count = applicationService.countByProgramAndStatus(prog, "enrolled");
-//		model.addAttribute("program", prog);
-//		model.addAttribute("count",count);
-		
+		prog.setStartDate(program.getStartDate());
+		prog.setEndDate(program.getEndDate());
+		prog.setSchedule(program.getSchedule());
+		prog.setDeadline(program.getDeadline());
+		programService.saveProgram(prog);
+
 		User user = userService.findByUsername(principal.getName());
 		model.addAttribute("user", user);
 		
 		return "dashboard";
 		
+	}	
+	
+	@RequestMapping(value="/addsession", method=RequestMethod.POST)
+	public String addSession(@Valid @ModelAttribute("program") Program program, Model model) {
+		
+		Program prog = programService.findById(program.getId());
+		Long count = applicationService.countByProgramAndStatus(prog, "enrolled");
+		
+		model.addAttribute("program",prog);
+		model.addAttribute("newProgram",new Program());
+		model.addAttribute("count",count);
+
+		return "addsession";
 	}
+	
+	@RequestMapping(value="/addedsession", method=RequestMethod.POST)
+	public String addedsession(@Valid @ModelAttribute("newProgram") Program newProgram, Model model, Principal principal) {
+		//program holds values coming in from user's inputs via form
+		//prog is the existing base program in the database
+		//newProgram is the new program to be added to the database
+		Program oldProg = programService.findFirstByName(newProgram.getName());
+		
+		System.out.println(oldProg.getCollege());
+		newProgram.setCollege(oldProg.getCollege());
+		programService.saveProgram(newProgram);
+		
+//		
+//		Program prog = programService.findById(program.getId());
+//		
+//		newProgram.setActive("true");
+//		newProgram.setClassSize(program.getClassSize());
+//		newProgram.setCollege(program.getCollege());
+//		newProgram.setDeadline(prog.getDeadline());
+//		newProgram.setDescription(program.getDescription());
+//		newProgram.setEndDate(prog.getEndDate());
+//		newProgram.setName(program.getName());
+//		newProgram.setQuestions(program.getQuestions());
+//		newProgram.setSchedule(prog.getSchedule());
+//		newProgram.setStartDate(prog.getStartDate());
+//
+//		programService.saveProgram(newProgram);
+//		
+//		College college = program.getCollege();
+//		college.addProgram(newProgram);
+//		
+//		List<Question> quest = program.getQuestions();
+//		Iterator<Question> iter = quest.iterator();
+//		while(iter.hasNext()) {
+//			Question q = iter.next();
+//			q.addProgram(newProgram);
+//			questionService.saveQuestion(q);
+//		}
+//		
+//		collegeService.saveCollege(college);
+//		
+		User user = userService.findByUsername(principal.getName());
+		model.addAttribute("user", user);
+		
+		return "dashboard";
+		
+	}	
+	
 //	
 //	@RequestMapping(value="/editprogram", method=RequestMethod.POST)
 //	public String editProg2(Principal principal, Model model) {
