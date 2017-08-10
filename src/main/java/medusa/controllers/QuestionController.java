@@ -38,8 +38,8 @@ public class QuestionController {
     }
     
     @RequestMapping(value="/addquestion", method = RequestMethod.POST)
-    public String addedQuestion(@Valid @ModelAttribute("question") Question question, @RequestParam("program") String name) {
-    	Program prog = programService.findByName(name);
+    public String addedQuestion(@Valid @ModelAttribute("question") Question question, @RequestParam("program") long id) {
+    	Program prog = programService.findById(id);
     	question.addProgram(prog);
     	prog.addQuestion(question);
     	questionService.saveQuestion(question);
@@ -74,18 +74,18 @@ public class QuestionController {
     }
     
     @RequestMapping(value="removequestion", method = RequestMethod.POST)
-    public String deleteQuestion(Model model, @Valid @ModelAttribute("question") Question question, @Valid @ModelAttribute("program") Program program) {
+    public String deleteQuestion(Model model, @Valid @ModelAttribute("question") Question question, @RequestParam("programID") long id) {
     	Question q = questionService.findByContent(question.getContent());
     	q.setActive("false");
     	questionService.saveQuestion(q);
-    	model.addAttribute("program",program);
-    	model.addAttribute("questions", program.getQuestions());
+    	model.addAttribute("program",programService.findById(id));
+    	model.addAttribute("questions", programService.findById(id).getQuestions());
     	return "redirect:/viewquestions";
     }
     
     @RequestMapping(value="editquestion", method = RequestMethod.POST)
-    public String editQuestion(Model model, @Valid @ModelAttribute("question") Question question, @Valid @ModelAttribute("program") Program program) {
-    	model.addAttribute("program",program);
+    public String editQuestion(Model model, @Valid @ModelAttribute("question") Question question, @RequestParam("programID") long id) {
+    	model.addAttribute("program",programService.findById(id));
     	model.addAttribute("question", question);
     	return "editquestion";
     }
