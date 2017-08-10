@@ -50,16 +50,6 @@
 					</form>
 					<form action="#" th:action="@{editprogram}" th:object="${program}" method="post">
 						<input type="hidden" name="id" th:value="${program.id}" />
-						<input type="hidden" name="name" th:value="${program.name}" />
-						<input type="hidden" name="description" th:value="${program.description}" />
-						<input type="hidden" name="startDate" th:value="${program.startDate}" />
-						<input type="hidden" name="endDate" th:value="${program.endDate}" />
-						<input type="hidden" name="classSize" th:value="${program.classSize}" />
-						<input type="hidden" name="active" th:value="${program.active}" />
-						<input type="hidden" name="open" th:value="${program.open}" />
-						<input type="hidden" name="deadline" th:value="${program.deadline}" />
-						<input type="hidden" name="schedule" th:value="${program.schedule}" />
-						<input type="hidden" name="college" th:value="${program.college.id}" />
 						<button class="btn btn-block" type="submit">Edit Program</button>
 					</form>
 				</div>
@@ -74,6 +64,24 @@
 					<th:block th:each="progAdmin : ${program.users}">
 						<p th:text="${progAdmin.firstName + ' ' + progAdmin.lastName}"></p>
 					</th:block>
+				</div>
+			</div>
+			<div class="row">
+				<div class="addsession">
+					<form action="#" th:action="@{addsession}" th:object="${program}" method="post">
+						<input type="hidden" name="id" th:value="${program.id}" />
+						<input type="hidden" name="name" th:value="${program.name}" />
+						<input type="hidden" name="description" th:value="${program.description}" />
+						<input type="hidden" name="startDate" th:value="${program.startDate}" />
+						<input type="hidden" name="endDate" th:value="${program.endDate}" />
+						<input type="hidden" name="classSize" th:value="${program.classSize}" />
+						<input type="hidden" name="active" th:value="${program.active}" />
+						<input type="hidden" name="open" th:value="${program.open}" />
+						<input type="hidden" name="deadline" th:value="${program.deadline}" />
+						<input type="hidden" name="schedule" th:value="${program.schedule}" />
+						<input type="hidden" name="college" th:value="${program.college.id}" />
+						<button class="btn btn-block" type="submit">Add Session</button>
+					</form>
 				</div>
 			</div>
 			

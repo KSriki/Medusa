@@ -48,11 +48,13 @@
 			<div class="course-description">
 				<p th:text="${program.description}"></p>
 			</div>
+			
 				<div class="row">
 					<div class="course-college-deadline">
 					<p th:text="${program.college.name}"></p>
 					<p th:text="${'Deadline: ' + program.deadline}"></p>
 				</div>
+				
 				<div class="course-enrollment-range">
 					<p th:text="${'Students Enrolled: ' + counts[index] + '/' + program.classSize}"></p>
 					<p th:text="${program.startDate + ' - ' + program.endDate}"></p>
