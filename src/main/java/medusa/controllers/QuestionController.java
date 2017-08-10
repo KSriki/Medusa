@@ -49,7 +49,7 @@ public class QuestionController {
     
     @RequestMapping(value="/viewquestions", method = RequestMethod.POST)
     public String viewQuestions(@Valid @ModelAttribute("program") Program program, Model model) {
-    	List<Question> questions = programService.findByName(program.getName()).getQuestions();
+    	List<Question> questions = programService.findById(program.getId()).getQuestions();
     	model.addAttribute("questions", questions);
     	model.addAttribute("program", program);
     	return "viewquestions";
@@ -75,19 +75,36 @@ public class QuestionController {
     
     @RequestMapping(value="removequestion", method = RequestMethod.POST)
     public String deleteQuestion(Model model, @Valid @ModelAttribute("question") Question question, @RequestParam("programID") long id) {
-    	Question q = questionService.findByContent(question.getContent());
+    	Question q = questionService.findByContentAndActive(question.getContent(), "true");
     	q.setActive("false");
     	questionService.saveQuestion(q);
+    	System.out.println(programService.findById(id).getCollege());
     	model.addAttribute("program",programService.findById(id));
     	model.addAttribute("questions", programService.findById(id).getQuestions());
-    	return "redirect:/viewquestions";
+    	return "viewquestions";
     }
     
-    @RequestMapping(value="editquestion", method = RequestMethod.POST)
+    @RequestMapping(value="editquestion", method = RequestMethod.GET)
     public String editQuestion(Model model, @Valid @ModelAttribute("question") Question question, @RequestParam("programID") long id) {
     	model.addAttribute("program",programService.findById(id));
     	model.addAttribute("question", question);
     	return "editquestion";
+    }
+    
+    @RequestMapping(value="editquestion", method = RequestMethod.POST)
+    public String editQuestion(@Valid @ModelAttribute("question") Question question, @RequestParam("program") long id, Model model) {
+    	Question q = questionService.findById(question.getId());
+    	for (Program p: q.getPrograms()) {
+    		question.addProgram(p);
+    	}
+    	for (Response r: q.getResponses()) {
+    		question.addResponse(r);
+    	}
+    	questionService.saveQuestion(question);
+    	model.addAttribute("program",programService.findById(id));
+    	System.out.println(programService.findById(id).getQuestions());
+    	model.addAttribute("questions", programService.findById(id).getQuestions());
+    	return "viewquestions";
     }
 	
 }

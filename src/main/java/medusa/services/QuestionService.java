@@ -22,4 +22,12 @@ public class QuestionService {
     public Question findByContent(String content) {
     	return questionRepository.findByContent(content);
     }
+    
+    public Question findByContentAndActive(String content, String active) {
+    	return questionRepository.findByContentAndActive(content, active);
+    }
+    
+    public Question findById(long id) {
+    	return questionRepository.findById(id);
+    }
 }
